@@ -1,0 +1,101 @@
+\documentclass{scrartcl}
+\title{Sprawozdanie 1 \\ Przetwarzanie równoległe}
+\subtitle{Mnożenie macierzy porównanie efektywności metod –\and
+3 pętle - kolejność pętli: jki,\and
+6 pętli - kolejność pętli: zewnętrznych ijk, wewnętrznych: ikj, podział pracy przed pętlą 1.}
+\date{2018-05-13}
+\author{{Bartosz Nawrotek, Krystian Hoczkiewicz}\and {Prowadzący: dr inż. Rafał Walkowiak}
+}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={170mm,257mm},
+ left=20mm,
+ top=20mm,
+ }
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{codeblue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codeblue}{rgb}{0,0,0.6}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\lstset{style=mystyle}
+
+
+\begin{document}
+\maketitle
+\section{Wstęp}
+Celem sprawozdania jest analiza wraz z porównaniem efektywności dwóch metod mnożenia macierzy:
+\begin{itemize}
+\item {3 pętle w kolejności jki}
+\item {6 pętli w kolejności zewnętrznych ijk, wewnętrznych ikj z podziałem pracy przed pierwszą pętlą}
+\end{itemize}
+Wynikiem mnożenia jest macierz $C$, czynnikami macierze $A, B$. Iloczyn jest liczony wg poniższego wzoru:
+\begin{equation}
+C_{i, j} = \sum_{k = 1}^{n}{A_{i, k}B_{k, j}}
+\end{equation}
+gdzie $n$ jest ilością wierszy macierzy kwadratowych $A$ oraz $B$.
+Do przeprowadzenia pomiarów korzystano z oprogramowania Code XL oraz do pomiaru czasu działania algorytmu biblioteka time.h.
+\section{Analiza algorytmów}
+\subsection{Metoda 3 pętlowa JKI}
+\begin{lstlisting}[language=C++]
+void multiply_matrices_JKI()
+{
+        // mnozenie macierzy 
+#pragma omp parallel for 
+	for (int j = 0 ; j < COLUMNS ; j++)
+      	    for (int k = 0 ; k < COLUMNS ; k++) 
+                  for (int i = 0 ; i < ROWS ; i++) 
+                        matrix_r[i][j]+= matrix_a[i][k] * matrix_b[k][j] ;
+                   
+}
+\end{lstlisting}
+\subsection{Metoda 6 pętlowa IJK-IKJ}
+\begin{lstlisting}[language=C++]
+void multiply_matrices_IJK_IKJ()
+{
+	int r = 10;
+	#pragma omp parallel for
+	for (int i = 0; i < ROWS; i+=r) {
+		for (int j = 0; j < COLUMNS; j+=r) {
+			for (int k = 0; k < COLUMNS; k+=r) {
+				for (int ii = i; ii < i + r; ii++) {
+					for (int kk = k; kk < k + r; kk++) {
+						for (int jj = j; jj < j + r; jj++) {
+						matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];
+						}
+					}
+				}
+			}
+		}
+	}
+}
+\end{lstlisting}
+\subsection{Dyrektywy Open MP}
+\section{}
+\end{document}
