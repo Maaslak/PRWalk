@@ -1,0 +1,161 @@
+﻿1024,16,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+95,0xc21829,for (int j = 0; j < COLUMNS; j += r) {,,,0,,,1.000000,1.000000
+96,0xc2184b,for (int k = 0; k < COLUMNS; k += r) {,,15.000000,0.018402649981597349,15.000000,,32.000000,5.000000
+97,0xc21864,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,344.000000,0.42203410624463256,344.000000,4.000000,432.000000,468.000000
+98,0xc21887,for (int kk = k; kk < k + r; kk++) {,,6336.000000,7.7732793522267212,6336.000000,7.000000,5042.000000,7701.000000
+99,0xc218a6,for (int jj = j; jj < j + r; jj++) {,,18246.000000,22.384983437615016,18246.000000,316.000000,14547.000000,27497.000000
+100,0xc218c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,44439.000000,54.519690835480304,44439.000000,1979.000000,41887.000000,55713.000000
+101,0xc2190d,},,11701.000000,14.355293828978038,11701.000000,111.000000,8382.000000,16902.000000
+102,0xc2190f,},,402.000000,0.49319101950680894,402.000000,1.000000,303.000000,376.000000
+103,0xc21914,},,27.000000,0.033124769966875231,27.000000,,18.000000,35.000000
+104,0xc21919,},,,0,,,1.000000,1.000000
+,,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+84,0xc21aa8,for (int k = 0; k < COLUMNS; k++),,6.000000,0.0091618439737971256,6.000000,18.000000,67.000000,6.000000
+85,0xc21aba,for (int i = 0; i < ROWS; i++),,386.000000,0.58941196231428172,386.000000,724.000000,5666.000000,183.000000
+86,0xc21ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,65097.000000,99.401426193711913,65097.000000,85589.000000,420435.000000,96470.000000
+Inicjalizacja macierzy,,| czas : 0.0980 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 3 pętle JKI,,| czas : 34.4730 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 6.1460 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+1024,64,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+96,0x12016fb,for (int k = 0; k < COLUMNS; k += r) {,,1.000000,0.0013307074040559961,1.000000,,2.000000,
+97,0x120171c,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,13.000000,0.017299196252727949,13.000000,,30.000000,31.000000
+98,0x120173a,for (int kk = k; kk < k + r; kk++) {,,1850.000000,2.4618086975035927,1850.000000,4.000000,1444.000000,2568.000000
+99,0x1201756,for (int jj = j; jj < j + r; jj++) {,,18124.000000,24.117740991110875,18124.000000,129.000000,13924.000000,24435.000000
+100,0x1201775,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,43285.000000,57.599669984563796,43285.000000,1706.000000,37065.000000,60784.000000
+101,0x12017bd,},,11769.000000,15.661095438335018,11769.000000,35.000000,8554.000000,17402.000000
+102,0x12017bf,},,104.000000,0.13839357002182359,104.000000,,77.000000,103.000000
+103,0x12017c4,},,2.000000,0.0026614148081119922,2.000000,,,6.000000
+,,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+83,0x1201867,for (int j = 0; j < COLUMNS; j++),,,0,,,1.000000,
+84,0x1201886,for (int k = 0; k < COLUMNS; k++),,2.000000,0.0030548809360155188,2.000000,25.000000,71.000000,2.000000
+85,0x1201898,for (int i = 0; i < ROWS; i++),,454.000000,0.69345797247552277,454.000000,617.000000,6225.000000,162.000000
+86,0x12018b3,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,65013.000000,99.303487146588466,65013.000000,85662.000000,412490.000000,96584.000000
+Inicjalizacja macierzy,,| czas : 0.0990 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 3 pętle JKI,,| czas : 34.4120 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 5.3810 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+1024,128,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+97,0xa9171c,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,6.000000,0.0080572602629352605,6.000000,,7.000000,8.000000
+98,0xa9173a,for (int kk = k; kk < k + r; kk++) {,,895.000000,1.201874655887843,895.000000,1.000000,673.000000,1502.000000
+99,0xa91756,for (int jj = j; jj < j + r; jj++) {,,17706.000000,23.77697503592195,17706.000000,83.000000,13487.000000,24580.000000
+100,0xa91775,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,43556.000000,58.490338002068029,43556.000000,1154.000000,36442.000000,59522.000000
+101,0xa917bd,},,12243.000000,16.440839566519397,12243.000000,42.000000,8685.000000,19341.000000
+102,0xa917bf,},,60.000000,0.080572602629352591,60.000000,,38.000000,43.000000
+103,0xa917c4,},,1.000000,0.00134287671048921,1.000000,,,
+,,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+83,0xa91867,for (int j = 0; j < COLUMNS; j++),,,0,,,3.000000,
+84,0xa91886,for (int k = 0; k < COLUMNS; k++),,3.000000,0.0045735890477787604,3.000000,23.000000,58.000000,7.000000
+85,0xa91898,for (int i = 0; i < ROWS; i++),,461.000000,0.70280818367533615,461.000000,535.000000,6170.000000,194.000000
+86,0xa918b3,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,65130.000000,99.29261822727689,65130.000000,85777.000000,413730.000000,96764.000000
+Inicjalizacja macierzy,,| czas : 0.1050 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 3 pętle JKI,,| czas : 34.5850 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 5.3970 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+512,16,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+94,0xe516ba,for (int i = 0; i < ROWS; i += r) {,,,0,,,1.000000,
+95,,for (int j = 0; j < COLUMNS; j += r) {,,,,,,,
+96,0xe516fb,for (int k = 0; k < COLUMNS; k += r) {,,2.000000,0.019716088328075709,2.000000,,2.000000,2.000000
+97,0xe51717,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,30.000000,0.29574132492113564,30.000000,,49.000000,40.000000
+98,0xe51737,for (int kk = k; kk < k + r; kk++) {,,835.000000,8.2314668769716093,835.000000,2.000000,735.000000,1112.000000
+99,0xe51756,for (int jj = j; jj < j + r; jj++) {,,2301.000000,22.683359621451103,2301.000000,39.000000,1815.000000,3422.000000
+100,0xe51775,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,5427.000000,53.499605678233443,5427.000000,86.000000,4696.000000,6596.000000
+101,0xe517bd,},,1516.000000,14.944794952681386,1516.000000,4.000000,1045.000000,2315.000000
+102,0xe517bf,},,28.000000,0.27602523659305994,28.000000,,34.000000,31.000000
+103,0xe517c4,},,5.000000,0.049290220820189273,5.000000,,1.000000,2.000000
+104,0xe517c9,},,,0,,,,1.000000
+,,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+84,0xe51886,for (int k = 0; k < COLUMNS; k++),,1.000000,0.012232415902140673,1.000000,2.000000,12.000000,9.000000
+85,0xe518a1,for (int i = 0; i < ROWS; i++),,251.000000,3.070336391437309,251.000000,323.000000,804.000000,362.000000
+86,0xe518b3,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,7923.000000,96.917431192660558,7923.000000,10458.000000,22231.000000,11658.000000
+Inicjalizacja macierzy,,| czas : 0.0250 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 3 pętle JKI,,| czas : 1.8850 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 1.5690 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+512,64,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+97,0xe5171c,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,1.000000,0.010624734381640459,1.000000,,2.000000,3.000000
+98,0xe5173f,for (int kk = k; kk < k + r; kk++) {,,216.000000,2.2949426264343393,216.000000,,181.000000,279.000000
+99,0xe51756,for (int jj = j; jj < j + r; jj++) {,,2175.000000,23.108797280067996,2175.000000,48.000000,1696.000000,3278.000000
+100,0xe51775,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,5513.000000,58.574160645983852,5513.000000,193.000000,4638.000000,7155.000000
+101,0xe517bd,},,1494.000000,15.873353166170844,1494.000000,8.000000,1073.000000,2439.000000
+102,0xe517bf,},,13.000000,0.13812154696132595,13.000000,,6.000000,7.000000
+,,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+84,0xe51886,for (int k = 0; k < COLUMNS; k++),,1.000000,0.012236906510034264,1.000000,4.000000,24.000000,11.000000
+85,0xe51898,for (int i = 0; i < ROWS; i++),,235.000000,2.875673029858052,235.000000,362.000000,809.000000,309.000000
+86,0xe518b3,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,7936.000000,97.112090063631911,7936.000000,10442.000000,22255.000000,11743.000000
+Inicjalizacja macierzy,,| czas : 0.0240 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 3 pętle JKI,,| czas : 1.8930 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 1.5100 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+512,128,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+97,0xae171c,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,1.000000,0.010744600838078867,1.000000,,,
+98,0xae173f,for (int kk = k; kk < k + r; kk++) {,,106.000000,1.1389276888363598,106.000000,1.000000,83.000000,192.000000
+99,0xae1756,for (int jj = j; jj < j + r; jj++) {,,2228.000000,23.938970667239712,2228.000000,24.000000,1730.000000,3266.000000
+100,0xae1775,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,5427.000000,58.310948748253999,5427.000000,108.000000,4477.000000,7369.000000
+101,0xae17bd,},,1539.000000,16.535940689803375,1539.000000,7.000000,1098.000000,2271.000000
+102,0xae17bf,},,6.000000,0.064467605028473193,6.000000,,3.000000,3.000000
+103,0xae17c4,},,,0,,,,1.000000
+,,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+84,0xae1886,for (int k = 0; k < COLUMNS; k++),,2.000000,0.024479804161566709,2.000000,2.000000,21.000000,6.000000
+85,0xae1898,for (int i = 0; i < ROWS; i++),,213.000000,2.6070991432068542,213.000000,331.000000,794.000000,333.000000
+86,0xae18b3,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,7955.000000,97.368421052631575,7955.000000,10473.000000,22467.000000,11710.000000
+Inicjalizacja macierzy,,| czas : 0.0250 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 3 pętle JKI,,| czas : 1.8760 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 1.4770 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+256,16,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+96,0xd816fb,for (int k = 0; k < COLUMNS; k += r) {,,1.000000,0.078064012490242002,1.000000,,1.000000,
+97,0xd8171c,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,7.000000,0.54644808743169404,7.000000,,4.000000,3.000000
+98,0xd81737,for (int kk = k; kk < k + r; kk++) {,,100.000000,7.8064012490242005,100.000000,,90.000000,183.000000
+99,0xd81756,for (int jj = j; jj < j + r; jj++) {,,295.000000,23.028883684621391,295.000000,2.000000,201.000000,420.000000
+100,0xd81775,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,679.000000,53.005464480874323,679.000000,13.000000,591.000000,791.000000
+101,0xd817bd,},,195.000000,15.22248243559719,195.000000,3.000000,148.000000,291.000000
+102,0xd817bf,},,4.000000,0.31225604996096801,4.000000,,2.000000,4.000000
+,,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+84,0xd81886,for (int k = 0; k < COLUMNS; k++),,,0,,1.000000,3.000000,4.000000
+85,0xd818a1,for (int i = 0; i < ROWS; i++),,75.000000,7.3170731707317067,75.000000,68.000000,107.000000,85.000000
+86,0xd818b3,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,950.000000,92.682926829268297,950.000000,1286.000000,1702.000000,1426.000000
+Inicjalizacja macierzy,,| czas : 0.0070 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 3 pętle JKI,,| czas : 0.1540 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 0.2400 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+256,64,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+98,0x33173f,for (int kk = k; kk < k + r; kk++) {,,19.000000,1.6115351993214586,19.000000,,22.000000,25.000000
+99,0x331756,for (int jj = j; jj < j + r; jj++) {,,271.000000,22.985581000848178,271.000000,3.000000,205.000000,447.000000
+100,0x331775,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,688.000000,58.35453774385072,688.000000,13.000000,522.000000,843.000000
+101,0x3317bd,},,200.000000,16.963528413910094,200.000000,1.000000,178.000000,341.000000
+102,0x3317bf,},,1.000000,0.084817642069550461,1.000000,,,1.000000
+103,0x3317c4,},,,0,,,,1.000000
+,,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+84,0x331886,for (int k = 0; k < COLUMNS; k++),,4.000000,0.390625,4.000000,2.000000,5.000000,5.000000
+85,0x331898,for (int i = 0; i < ROWS; i++),,67.000000,6.54296875,67.000000,68.000000,123.000000,85.000000
+86,0x3318b3,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,953.000000,93.06640625,953.000000,1283.000000,1693.000000,1407.000000
+Inicjalizacja macierzy,,| czas : 0.0060 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 3 pętle JKI,,| czas : 0.1530 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 0.2290 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+128,16,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+97,0x7171c,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,1.000000,0.62893081761006298,1.000000,,,
+98,0x7173f,for (int kk = k; kk < k + r; kk++) {,,11.000000,6.9182389937106921,11.000000,,15.000000,27.000000
+99,0x71756,for (int jj = j; jj < j + r; jj++) {,,33.000000,20.754716981132077,33.000000,,27.000000,37.000000
+100,0x71775,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,80.000000,50.314465408805034,80.000000,1.000000,76.000000,124.000000
+101,0x717bd,},,34.000000,21.383647798742139,34.000000,,17.000000,26.000000
+102,0x717bf,},,,0,,,2.000000,
+,,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
+84,0x71886,for (int k = 0; k < COLUMNS; k++),,2.000000,1.6000000000000001,2.000000,1.000000,,1.000000
+85,0x718a1,for (int i = 0; i < ROWS; i++),,12.000000,9.5999999999999996,12.000000,1.000000,17.000000,16.000000
+86,0x718b3,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,111.000000,88.799999999999997,111.000000,30.000000,144.000000,173.000000
+Inicjalizacja macierzy,,| czas : 0.0010 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 3 pętle JKI,,| czas : 0.0150 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 0.0260 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
+
