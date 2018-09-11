@@ -1,4 +1,4 @@
-﻿1024,16,6,,,,,,,
+1024,16,6,,,,,,,
 Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
 95,0xc21829,for (int j = 0; j < COLUMNS; j += r) {,,,0,,,1.000000,1.000000
 96,0xc2184b,for (int k = 0; k < COLUMNS; k += r) {,,15.000000,0.018402649981597349,15.000000,,32.000000,5.000000
@@ -158,4 +158,3 @@ Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC acce
 Inicjalizacja macierzy,,| czas : 0.0010 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
 Mnożenie macierzy 3 pętle JKI,,| czas : 0.0150 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
 Mnożenie macierzy 6 pętli IJK-IKJ,,| czas : 0.0260 sec (0.0010 sec rozdzielczosc pomiaru),,,,,,,
-
