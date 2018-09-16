@@ -111,10 +111,10 @@ Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC acce
 Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
 82,0x331cfb,for (int kk = k; kk < k + r; kk++) {,,6.000000,7.0588235294117645,6.000000,,2.000000,14.000000
 83,0x331bb3,for (int jj = j; jj < j + r; jj++) {,,8.000000,9.4117647058823533,8.000000,,15.000000,22.000000
+84,0x331be2,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,71.000000,83.529411764705884,71.000000,6.000000,97.000000,171.000000
 Init
 ,,IJK | | 0.0150,,,,,,,
 ,,IJK-IKJ | | 0.0150,,,,,,,
-84,0x331be2,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,71.000000,83.529411764705884,71.000000,6.000000,97.000000,171.000000
 128,16,3,,,,,,,
 Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DC accesses,DC misses,CPU clocks,Ret inst
 68,0xb21df0,for (int j = 0; j < COLUMNS; j++),,,0,,,2.000000,4.000000
