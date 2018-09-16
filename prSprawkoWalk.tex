@@ -161,9 +161,14 @@ Dla metody 6 pętlowej [1]:
 \subsection{Przydział pracy do wątków}
 \paragraph{}Użycie dyrektywy Open MP "\#pragma omp parallel for" sprawia, że przydział pracy do wątków jest równomierny jeżeli jest to możliwe. Taki przydział występuje gdy liczba iteracji jest podzielna przez liczbę procesorów. W przeciwnym wypadku pozostałe iteracje (ich ilość jest równa reszcie z dzielenia liczby iteracji na liczbę procesorów)jest rozdzielana między wątkami. W tym wypadku możliwe jest zaobserwowanie nieznacznego spadku efektywności działającego algorytmu.
 //TODO OBRAZKI
-\section{Analiza pomiarów}
+\section{Analiza przetwarzania}
 \subsection{Prezentacja miar i jakości przetwarzania}
 \paragraph{}
  Nazwa instancji - składa się na nią rozmiar macierzy, rozmiar instancji (w metodzie 6 pętlowej) oraz typ metody (3 lub 6 pętlowa).
-
+\subsection{Metoda 3 pętlowa JKI}
+\subsubsection{Sekwencyjnie}
+\subsubsection{Równolegle}
+\subsection{Metoda 6 pętlowa IJK-IKJ}
+\subsubsection{Sekwencyjnie}
+\subsubsection{Równolegle}
 \end{document}
