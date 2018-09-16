@@ -1,0 +1,117 @@
+1024,16,3,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+84,0x8c1aa8,for (int k = 0; k < COLUMNS; k++),,5.000000,0.014689033167836893,5.000000
+85,0x8c1ac3,for (int i = 0; i < ROWS; i++),,442.000000,1.2985105320367814,442.000000
+86,0x8c1ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,33592.000000,98.686800434795387,33592.000000
+,,6,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+95,0x8c182c,for (int j = 0; j < COLUMNS; j += r) {,,1.000000,0.018057060310581439,1.000000
+96,0x8c184b,for (int k = 0; k < COLUMNS; k += r) {,,1.000000,0.018057060310581439,1.000000
+97,0x8c186c,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,32.000000,0.57782592993860604,32.000000
+98,0x8c1887,for (int kk = k; kk < k + r; kk++) {,,394.000000,7.1144817623690866,394.000000
+99,0x8c18a6,for (int jj = j; jj < j + r; jj++) {,,1124.000000,20.296135789093537,1124.000000
+100,0x8c18c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,3279.000000,59.209100758396538,3279.000000
+101,0x8c190d,},,694.000000,12.531599855543519,694.000000
+102,0x8c190f,},,12.000000,0.21668472372697722,12.000000
+103,,},,,,
+104,0x8c1919,},,1.000000,0.018057060310581439,1.000000
+,,,,,,
+1024,64,3,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+84,0xb1aa8,for (int k = 0; k < COLUMNS; k++),,6.000000,0.017699637157438275,6.000000
+85,0xb1aba,for (int i = 0; i < ROWS; i++),,420.000000,1.238974601020679,420.000000
+86,0xb1ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,33473.000000,98.743325761821893,33473.000000
+,,6,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+97,0xb186c,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,2.000000,0.04141644232760406,2.000000
+98,0xb188f,for (int kk = k; kk < k + r; kk++) {,,114.000000,2.3607372126734312,114.000000
+99,0xb18a6,for (int jj = j; jj < j + r; jj++) {,,1134.000000,23.483122799751502,1134.000000
+100,0xb18c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,2889.000000,59.826050942224064,2889.000000
+101,0xb190d,},,687.000000,14.226547939531994,687.000000
+102,0xb190f,},,3.000000,0.062124663491406086,3.000000
+,,,,,,
+1024,128,3,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+84,0x11d1aa8,for (int k = 0; k < COLUMNS; k++),,5.000000,0.014785900165602084,5.000000
+85,0x11d1aba,for (int i = 0; i < ROWS; i++),,457.000000,1.3514312751360302,457.000000
+86,0x11d1ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,33354.000000,98.633782824698372,33354.000000
+,,6,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+98,0x11d188f,for (int kk = k; kk < k + r; kk++) {,,45.000000,0.95016891891891897,45.000000
+99,0x11d18a6,for (int jj = j; jj < j + r; jj++) {,,1066.000000,22.508445945945947,1066.000000
+100,0x11d18c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,2907.000000,61.380912162162161,2907.000000
+101,0x11d190d,},,715.000000,15.097128378378377,715.000000
+102,0x11d190f,},,3.000000,0.0633445945945946,3.000000
+,,,,,,
+512,16,3,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+84,0xeb1aa8,for (int k = 0; k < COLUMNS; k++),,2.000000,0.096339113680154145,2.000000
+85,0xeb1ac3,for (int i = 0; i < ROWS; i++),,71.000000,3.4200385356454719,71.000000
+86,0xeb1ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,2003.000000,96.483622350674366,2003.000000
+,,6,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+97,0xeb1867,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,8.000000,1.1904761904761905,8.000000
+98,0xeb188f,for (int kk = k; kk < k + r; kk++) {,,45.000000,6.6964285714285712,45.000000
+99,0xeb18a6,for (int jj = j; jj < j + r; jj++) {,,169.000000,25.148809523809522,169.000000
+100,0xeb18c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,363.000000,54.017857142857139,363.000000
+101,0xeb190d,},,84.000000,12.5,84.000000
+102,0xeb190f,},,3.000000,0.4464285714285714,3.000000
+,,,,,,
+512,64,3,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+84,0x361aa8,for (int k = 0; k < COLUMNS; k++),,2.000000,0.098087297694948505,2.000000
+85,0x361ac3,for (int i = 0; i < ROWS; i++),,58.000000,2.8445316331535064,58.000000
+86,0x361ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,1979.000000,97.057381069151546,1979.000000
+,,6,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+98,0x36188f,for (int kk = k; kk < k + r; kk++) {,,13.000000,2.1416803953871502,13.000000
+99,0x3618a6,for (int jj = j; jj < j + r; jj++) {,,138.000000,22.734761120263592,138.000000
+100,0x3618c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,378.000000,62.273476112026358,378.000000
+101,0x36190d,},,77.000000,12.685337726523887,77.000000
+102,0x36190f,},,1.000000,0.16474464579901155,1.000000
+,,,,,,
+512,128,3,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+85,0x1081aba,for (int i = 0; i < ROWS; i++),,61.000000,3.0064070970921635,61.000000
+86,0x1081ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,1968.000000,96.993592902907835,1968.000000
+,,6,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+98,0x108188f,for (int kk = k; kk < k + r; kk++) {,,6.000000,1.015228426395939,6.000000
+99,0x10818ae,for (int jj = j; jj < j + r; jj++) {,,121.000000,20.473773265651438,121.000000
+100,0x10818c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,348.000000,58.883248730964468,348.000000
+101,0x108190d,},,116.000000,19.627749576988155,116.000000
+,,,,,,
+256,16,3,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+85,0x871ac3,for (int i = 0; i < ROWS; i++),,10.000000,6.756756756756757,10.000000
+86,0x871ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,138.000000,93.243243243243242,138.000000
+,,6,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+97,0x87186f,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,1.000000,1.1764705882352942,1.000000
+98,0x87188f,for (int kk = k; kk < k + r; kk++) {,,6.000000,7.0588235294117645,6.000000
+99,0x8718ae,for (int jj = j; jj < j + r; jj++) {,,22.000000,25.882352941176475,22.000000
+100,0x8718c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,42.000000,49.411764705882355,42.000000
+101,0x87190d,},,13.000000,15.294117647058824,13.000000
+102,0x87190f,},,1.000000,1.1764705882352942,1.000000
+,,,,,,
+256,64,3,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+84,0xf01aa8,for (int k = 0; k < COLUMNS; k++),,3.000000,2.0689655172413794,3.000000
+85,0xf01ac3,for (int i = 0; i < ROWS; i++),,5.000000,3.4482758620689653,5.000000
+86,0xf01ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,137.000000,94.482758620689651,137.000000
+,,6,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+99,0xf018ae,for (int jj = j; jj < j + r; jj++) {,,12.000000,16.216216216216218,12.000000
+100,0xf018c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,49.000000,66.21621621621621,49.000000
+101,0xf0190d,},,13.000000,17.567567567567568,13.000000
+,,,,,,
+128,16,3,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+85,0xe41ac9,for (int i = 0; i < ROWS; i++),,1.000000,7.6923076923076925,1.000000
+86,0xe41ae1,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,12.000000,92.307692307692307,12.000000
+,,6,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,Timer
+98,0xe41892,for (int kk = k; kk < k + r; kk++) {,,1.000000,12.5,1.000000
+99,0xe418ae,for (int jj = j; jj < j + r; jj++) {,,2.000000,25,2.000000
+100,0xe418ce,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,4.000000,50,4.000000
+101,0xe4190d,},,1.000000,12.5,1.000000

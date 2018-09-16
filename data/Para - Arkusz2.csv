@@ -1,0 +1,110 @@
+1024,16,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+84,0x151aa8,for (int k = 0; k < COLUMNS; k++),,,0,,10.000000,1.000000,2.000000
+85,0x151ac3,for (int i = 0; i < ROWS; i++),,74.000000,1.7354596622889307,74.000000,1873.000000,218.000000,122.000000
+86,0x151ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,4190.000000,98.264540337711068,4190.000000,79900.000000,17643.000000,11633.000000
+,,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+96,0x15184b,for (int k = 0; k < COLUMNS; k += r) {,,,0,,,2.000000,
+97,0x15186c,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,,0,,1.000000,9.000000,1.000000
+98,0x15188f,for (int kk = k; kk < k + r; kk++) {,,,0,,1.000000,95.000000,65.000000
+99,0x1518a6,for (int jj = j; jj < j + r; jj++) {,,78.000000,25.407166123778502,78.000000,2.000000,274.000000,172.000000
+100,0x1518c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,210.000000,68.403908794788265,210.000000,165.000000,849.000000,507.000000
+101,0x15190d,},,19.000000,6.1889250814332248,19.000000,5.000000,169.000000,94.000000
+102,0x15190f,},,,0,,,3.000000,3.000000
+103,0x151914,},,,0,,,1.000000,
+,,,,,,,,,
+1024,64,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+84,0xaa1aa8,for (int k = 0; k < COLUMNS; k++),,,0,,11.000000,1.000000,2.000000
+85,0xaa1aba,for (int i = 0; i < ROWS; i++),,87.000000,2.0317608594114902,87.000000,1788.000000,140.000000,127.000000
+86,0xaa1ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,4195.000000,97.968239140588508,4195.000000,79968.000000,13572.000000,8773.000000
+,,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+98,0xaa188f,for (int kk = k; kk < k + r; kk++) {,,,0,,,9.000000,5.000000
+99,0xaa18ae,for (int jj = j; jj < j + r; jj++) {,,554.000000,89.354838709677423,554.000000,,91.000000,59.000000
+100,0xaa18c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,66.000000,10.64516129032258,66.000000,24.000000,272.000000,135.000000
+101,0xaa190d,},,,0,,,51.000000,34.000000
+102,0xaa190f,},,,0,,,1.000000,
+,,,,,,,,,
+1024,128,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+84,0xab1aa8,for (int k = 0; k < COLUMNS; k++),,,0,,19.000000,2.000000,2.000000
+85,0xab1ac3,for (int i = 0; i < ROWS; i++),,78.000000,1.8275538894095593,78.000000,1837.000000,147.000000,94.000000
+86,0xab1ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,4190.000000,98.172446110590442,4190.000000,79902.000000,14239.000000,9270.000000
+,,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+98,0xab188f,for (int kk = k; kk < k + r; kk++) {,,,0,,,6.000000,
+99,0xab18ae,for (int jj = j; jj < j + r; jj++) {,,289.000000,91.455696202531641,289.000000,,86.000000,47.000000
+100,0xab18c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,27.000000,8.5443037974683538,27.000000,17.000000,250.000000,132.000000
+101,0xab190d,},,,0,,,54.000000,36.000000
+102,0xab190f,},,,0,,,1.000000,1.000000
+,,,,,,,,,
+512,16,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+84,0xe01aa8,for (int k = 0; k < COLUMNS; k++),,,0,,3.000000,,
+85,0xe01ac3,for (int i = 0; i < ROWS; i++),,144.000000,2.7486161481198703,144.000000,4.000000,3.000000,2.000000
+86,0xe01ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,5095.000000,97.251383851880121,5095.000000,123.000000,155.000000,80.000000
+,,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+98,0xe0188f,for (int kk = k; kk < k + r; kk++) {,,,0,,,3.000000,
+99,0xe018a6,for (int jj = j; jj < j + r; jj++) {,,1.000000,11.111111111111111,1.000000,,8.000000,1.000000
+100,0xe018c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,8.000000,88.888888888888886,8.000000,2.000000,15.000000,10.000000
+101,0xe0190d,},,,0,,,8.000000,3.000000
+,,,,,,,,,
+512,64,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+84,0x261ab8,for (int k = 0; k < COLUMNS; k++),,,0,,1.000000,,1.000000
+85,0x261ac3,for (int i = 0; i < ROWS; i++),,121.000000,2.3091603053435117,121.000000,2.000000,3.000000,4.000000
+86,0x261ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,5119.000000,97.690839694656489,5119.000000,133.000000,172.000000,83.000000
+,,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+99,0x2618ae,for (int jj = j; jj < j + r; jj++) {,,,0,,,7.000000,5.000000
+100,0x2618c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,1.000000,100,1.000000,1.000000,22.000000,19.000000
+101,0x26190d,},,,0,,,3.000000,2.000000
+102,0x26190f,},,,0,,,,1.000000
+,,,,,,,,,
+512,128,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+84,0x1021aa8,for (int k = 0; k < COLUMNS; k++),,,0,,4.000000,,
+85,0x1021ac3,for (int i = 0; i < ROWS; i++),,158.000000,3.0187237294612155,158.000000,,3.000000,2.000000
+86,0x1021ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,5076.000000,96.981276270538785,5076.000000,139.000000,193.000000,111.000000
+,,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+95,0x102182c,for (int j = 0; j < COLUMNS; j += r) {,,,0,,,,1.000000
+96,,for (int k = 0; k < COLUMNS; k += r) {,,,,,,,
+97,,for (int ii = i; ii < i + r; ii++) { // WYNIK CZʌCIOWY,,,,,,,
+98,,for (int kk = k; kk < k + r; kk++) {,,,,,,,
+99,0x10218ae,for (int jj = j; jj < j + r; jj++) {,,17.000000,77.272727272727266,17.000000,,29.000000,10.000000
+100,0x10218c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,5.000000,22.727272727272727,5.000000,4.000000,58.000000,32.000000
+101,0x102190d,},,,0,,,12.000000,6.000000
+,,,,,,,,,
+256,16,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+85,0xcc1ac3,for (int i = 0; i < ROWS; i++),,11.000000,3.293413173652695,11.000000,,1.000000,
+86,0xcc1ad8,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,323.000000,96.706586826347305,323.000000,,19.000000,15.000000
+,,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+98,0xcc1892,for (int kk = k; kk < k + r; kk++) {,,,0,,,2.000000,1.000000
+99,0xcc18ae,for (int jj = j; jj < j + r; jj++) {,,,0,,,2.000000,
+100,0xcc18c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,,0,,1.000000,5.000000,5.000000
+101,0xcc190d,},,,0,,,2.000000,1.000000
+,,,,,,,,,
+256,64,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+84,0xaa1ab8,for (int k = 0; k < COLUMNS; k++),,1.000000,0.29940119760479045,1.000000,,,
+85,0xaa1ac3,for (int i = 0; i < ROWS; i++),,17.000000,5.0898203592814371,17.000000,,,
+86,0xaa1ad5,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,316.000000,94.610778443113773,316.000000,,27.000000,13.000000
+,,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+99,0xaa18ae,for (int jj = j; jj < j + r; jj++) {,,1.000000,100,1.000000,,7.000000,
+100,0xaa18c5,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,,0,,,5.000000,4.000000
+,,,,,,,,,
+128,16,3,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+86,0x71aff,matrix_r[i][j] += matrix_a[i][k] * matrix_b[k][j];,,,0,,,1.000000,2.000000
+,,6,,,,,,,
+Line,Address,Source Code,Code Bytes,Hotspot Samples,% of Hotspot Samples,DTLB L1M L2H,DTLB L1M L2M,DRAM accesses,L3 misses
+98,0x7188f,for (int kk = k; kk < k + r; kk++) {,,,0,,,1.000000,
+99,0x718ae,for (int jj = j; jj < j + r; jj++) {,,,0,,,4.000000,
+100,0x718d7,matrix_r[ii][jj] += matrix_a[ii][kk] * matrix_b[kk][jj];,,,0,,,2.000000,2.000000
