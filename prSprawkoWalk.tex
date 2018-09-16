@@ -55,12 +55,12 @@ Prowadzący: dr inż. Rafał Walkowiak}
 \begin{document}
 \maketitle
 \section{Wstęp}
-Celem sprawozdania jest analiza wraz z porównaniem efektywności dwóch metod mnożenia macierzy w wersji równoległej oraz sekwencyjnej:
+\paragraph{}Celem sprawozdania jest analiza wraz z porównaniem efektywności dwóch metod mnożenia macierzy w wersji równoległej oraz sekwencyjnej:
 \begin{itemize}
 \item {3 pętle w kolejności jki}
 \item {6 pętli w kolejności zewnętrznych ijk, wewnętrznych ikj z podziałem pracy przed pierwszą pętlą}
 \end{itemize}
-Wynikiem mnożenia jest macierz $R$, czynnikami macierze $A, B$. Iloczyn jest liczony wg poniższego wzoru:
+\paragraph{}Wynikiem mnożenia jest macierz $R$, czynnikami macierze $A, B$. Iloczyn jest liczony wg poniższego wzoru:
 \begin{equation}
 R_{i, j} = \sum_{k = 1}^{n}{A_{i, k}B_{k, j}}
 \end{equation}
@@ -79,7 +79,7 @@ void multiply_matrices_JKI()
                         matrix_r[i][j]+= matrix_a[i][k] * matrix_b[k][j] ;              
 }
 \end{lstlisting}
-Jak widać metoda 3 pętlowa charakteryzuje się złożonością $O(n^3)$, gdzie $COLUMNS = ROWS = n$ dla macierzy kwadratowych. W sekwencyjnej metodzie 3 pętlowej wykorzystany został ten sam kod wraz z wyłączoną obsługą dyrektyw OpenMP. W wersji równoległej następuje przydział pracy przed pierwszą pętlą. Powoduje to statyczny podział pracy wg następującego wzoru:
+\paragraph{}Jak widać metoda 3 pętlowa charakteryzuje się złożonością $O(n^3)$, gdzie $COLUMNS = ROWS = n$ dla macierzy kwadratowych. W sekwencyjnej metodzie 3 pętlowej wykorzystany został ten sam kod wraz z wyłączoną obsługą dyrektyw OpenMP. W wersji równoległej następuje przydział pracy przed pierwszą pętlą. Powoduje to statyczny podział pracy wg następującego wzoru:
 \begin{equation}
 j = <id \frac{COLUMNS}{4}, (id + 1)\frac{COLUMNS}{4} - 1>,
 j \in \mathbb{Z}
@@ -106,17 +106,17 @@ void multiply_matrices_IJK_IKJ()
 	}
 }
 \end{lstlisting}
-Metoda 6 pętlowa wykazuje się tą samą złożonością obliczeniową co metoda 3 pętlowa. Wykorzystanie jej ma jednak wpływ na prędkość przetwarzania ze względu na budowę systemu obliczeniowego. Korzysta on z pamięci cache oraz bufora translacji, które aby optymalnie wykorzystać, należy zapewnić odpowiednie warunki przetwarzania, jak lokalność przestrzenna oraz czasowa.
+\paragraph{}Metoda 6 pętlowa wykazuje się tą samą złożonością obliczeniową co metoda 3 pętlowa. Wykorzystanie jej ma jednak wpływ na prędkość przetwarzania ze względu na budowę systemu obliczeniowego. Korzysta on z pamięci cache oraz bufora translacji, które aby optymalnie wykorzystać, należy zapewnić odpowiednie warunki przetwarzania, jak lokalność przestrzenna oraz czasowa.
 \subsection{Analiza poprawności algorytmów}
-Oba algorytmy w wersji sekwencyjnej są poprawne, ze względu na definicję mnożenia macierzy. W wersji równoległej również, ze względu na to, że każdy proces korzysta z innej, rozłącznej części macierzy wynikowej. Nie jest wymagana żadna dodatkowa metoda synchronizacji.
+\paragraph{}Oba algorytmy w wersji sekwencyjnej są poprawne, ze względu na definicję mnożenia macierzy. W wersji równoległej również, ze względu na to, że każdy proces korzysta z innej, rozłącznej części macierzy wynikowej. Nie jest wymagana żadna dodatkowa metoda synchronizacji.
 \subsection{Efektywność - synchronizacja}
-Jak było nadmienione w punkcie 2.1 oraz 2.2, obie metody cechują się tą samą złożonością obliczeniową. Jednak różnice efektywności mogą być znaczne ze względu na kolejność dostępu do danych z poszczególnych macierzy. Spodziewamy się prawie 4 krotnego przyspieszenia przetwarzania przy użyciu metod w wersji równoległej w stosunku do wersji sekwencyjnej ze względu na niski koszt synchronizacji (przydział pracy statyczny przed pętlą zewnętrzną oraz synchronizacja na końcu działania funkcji).
-\subsection{False sharing}
-Jest to zjawisko, które może wystąpić tylko w przypadku przetwarzania równoległego. W metodzie równoległej 3 pętlowej zjawisko może wystąpić na krańcach przydzielonych obszarów macierzy $R$. Nie powinno jednak mieć to większego wpływu na czas przetwarzania ze względu na stosunkowo niewielkie fragmenty macierzy, gdzie zjawisko ma możliwość się pojawić.
-W metodzie równoległej 6 pętlowej zjawisko również może wystąpić na granicy ostatniego wiersza przydzielonego do danego procesora oraz pierwszego wiersza przydzielonego do kolejnego procesora. W tym wypadku, będzie prawdopodobnie niezauważalne, bo dla całej macierzy występują tylko 4 potencjalne miejsca wystąpienia tego zjawiska niezależnie od wielkości instancji.
+\paragraph{}Jak było nadmienione w punkcie 2.1 oraz 2.2, obie metody cechują się tą samą złożonością obliczeniową. Jednak różnice efektywności mogą być znaczne ze względu na kolejność dostępu do danych z poszczególnych macierzy. Spodziewamy się prawie 4 krotnego przyspieszenia przetwarzania przy użyciu metod w wersji równoległej w stosunku do wersji sekwencyjnej ze względu na niski koszt synchronizacji (przydział pracy statyczny przed pętlą zewnętrzną oraz synchronizacja na końcu działania funkcji).
 \newpage
+\subsection{False sharing}
+\paragraph{}Jest to zjawisko, które może wystąpić tylko w przypadku przetwarzania równoległego. W metodzie równoległej 3 pętlowej zjawisko może wystąpić na krańcach przydzielonych obszarów macierzy $R$. Nie powinno jednak mieć to większego wpływu na czas przetwarzania ze względu na stosunkowo niewielkie fragmenty macierzy, gdzie zjawisko ma możliwość się pojawić.
+W metodzie równoległej 6 pętlowej zjawisko również może wystąpić na granicy ostatniego wiersza przydzielonego do danego procesora oraz pierwszego wiersza przydzielonego do kolejnego procesora. W tym wypadku, będzie prawdopodobnie niezauważalne, bo dla całej macierzy występują tylko 4 potencjalne miejsca wystąpienia tego zjawiska niezależnie od wielkości instancji.
 \subsection{Lokalność dostępu do danych}
-Macierze deklarowane są jako tablice dwuwymiarowe, co implikuje przechowywanie ich w pamięci jako pojedyncza linia. Niesie to za sobą możliwość analizy lokalności dostępu do danych.
+\paragraph{}Macierze deklarowane są jako tablice dwuwymiarowe, co implikuje przechowywanie ich w pamięci jako pojedyncza linia. Niesie to za sobą możliwość analizy lokalności dostępu do danych.
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{3petlowa.png}
 \caption{Metoda 3 pętlowa JKI}
@@ -128,23 +128,23 @@ Dla metody 3 pętlowej biorąc pod uwagę iteracje wewnętrznej pętli można wy
 \item A - brak lokalności przestrzennej ani czasowej
 \item B - lokalność czasowa
 \end{itemize}
-Natomiast dla dwóch pętli wewnętrznych:
+\paragraph{}Natomiast dla dwóch pętli wewnętrznych:
 \begin{itemize}
 \item R - brak lokalności przestrzennej ani czasowej
 \item A - lokalność przestrzenna, brak lokalności czasowej ze względu na odczyt danych w poszczególnych kolumnach. (kolejne czytane komórki mają oddalone adresy o $n$)
 \item B - brak lokalności przestrzennej ani czasowej
 \end{itemize}
-Braki lokalności spowodowane są iterowaniem po kolejnych elementach w kolumnach poszczególnych macierzy. Powodować to będzie znaczne spadki efektywności działania algorytm.
+\paragraph{}Braki lokalności spowodowane są iterowaniem po kolejnych elementach w kolumnach poszczególnych macierzy. Powodować to będzie znaczne spadki efektywności działania algorytm.
 \paragraph{Uzasadnienie wielkości instancji} Aby zapewnić lokalność czasową przetwarzania należy spełnić poniższy warunek:
 \begin{equation}
 4N ^ 2 + 128N <= 6144 [B]
 \end{equation}
-Pierwszy człon wynika z rozmiaru macierzy $A$. Człon drugi jest sumą pamięci potrzebnej do przechwania macierzy $B$ oraz $R$, na każdy element macierzy potrzebne jest jedno słowo w pamięci podręcznej o wielkości 64B. Suma tych dwóch człownów musi mieścić się w pamięci podręcznej o rozmiarze 6MB. \\
+\paragraph{}Pierwszy człon wynika z rozmiaru macierzy $A$. Człon drugi jest sumą pamięci potrzebnej do przechwania macierzy $B$ oraz $R$, na każdy element macierzy potrzebne jest jedno słowo w pamięci podręcznej o wielkości 64B. Suma tych dwóch człownów musi mieścić się w pamięci podręcznej o rozmiarze 6MB. \\
 Aby zapewnić lokalność przestrzenną zdefiniowaną jako zapewnienie jednokrotnego uzupełnienia odwzorowania strony na ramkę pamięci dla $N > W_{ram}$, gdzie $W_{ram}$ jest wielkością ramki pamięci należy spełnić następujący warunek:
 \begin{equation}
 4N ^ 2 + 8192 N <= 550 * 4096 [B]
 \end{equation}
-Pierwszy człon wynika z wielkości macierzy A, drugi z faktu, że na każdy element macierzy potrzebne jest zachowanie całej strony pamięci. Powyższa suma powinna mieścić się w buforze translacji o wielkości $550 * 4096[B]$.
+\paragraph{}Pierwszy człon wynika z wielkości macierzy A, drugi z faktu, że na każdy element macierzy potrzebne jest zachowanie całej strony pamięci. Powyższa suma powinna mieścić się w buforze translacji o wielkości $550 * 4096[B]$.
 \paragraph{}
 Dla metody 6 pętlowej [1]:
 \begin{itemize}
@@ -159,8 +159,11 @@ Dla metody 6 pętlowej [1]:
 \item lokalność przestrzenna oraz czasowa
 \end{itemize}
 \subsection{Przydział pracy do wątków}
-Użycie dyrektywy Open MP "\#pragma omp parallel for" sprawia, że przydział pracy do wątków jest równomierny jeżeli jest to możliwe. Taki przydział występuje gdy liczba iteracji jest podzielna przez liczbę procesorów. W przeciwnym wypadku pozostałe iteracje (ich ilość jest równa reszcie z dzielenia liczby iteracji na liczbę procesorów)jest rozdzielana między wątkami. W tym wypadku możliwe jest zaobserwowanie nieznacznego spadku efektywności działającego algorytmu.
+\paragraph{}Użycie dyrektywy Open MP "\#pragma omp parallel for" sprawia, że przydział pracy do wątków jest równomierny jeżeli jest to możliwe. Taki przydział występuje gdy liczba iteracji jest podzielna przez liczbę procesorów. W przeciwnym wypadku pozostałe iteracje (ich ilość jest równa reszcie z dzielenia liczby iteracji na liczbę procesorów)jest rozdzielana między wątkami. W tym wypadku możliwe jest zaobserwowanie nieznacznego spadku efektywności działającego algorytmu.
 //TODO OBRAZKI
-\subsection{}
+\section{Analiza pomiarów}
+\subsection{Prezentacja miar i jakości przetwarzania}
+\paragraph{}
+ Nazwa instancji - składa się na nią rozmiar macierzy, rozmiar instancji (w metodzie 6 pętlowej) oraz typ metody (3 lub 6 pętlowa).
 
 \end{document}
