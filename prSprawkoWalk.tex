@@ -7,6 +7,7 @@
 \author{Bartosz Nawrotek, Krystian Hoczkiewicz \\
 Prowadzący: dr inż. Rafał Walkowiak}
 
+\usepackage{float}
 \usepackage[utf8]{inputenc}
 \usepackage{mathtools}
 \usepackage{amssymb}
@@ -46,8 +47,7 @@ Prowadzący: dr inż. Rafał Walkowiak}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \usepackage{graphicx}
-\graphicspath{ {img/} }
-
+\graphicspath{ {img/}{img/figures/}}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 \lstset{style=mystyle}
 
@@ -117,7 +117,7 @@ void multiply_matrices_IJK_IKJ()
 W metodzie równoległej 6 pętlowej zjawisko również może wystąpić na granicy ostatniego wiersza przydzielonego do danego procesora oraz pierwszego wiersza przydzielonego do kolejnego procesora. W tym wypadku, będzie prawdopodobnie niezauważalne, bo dla całej macierzy występują tylko 4 potencjalne miejsca wystąpienia tego zjawiska niezależnie od wielkości instancji.
 \subsection{Lokalność dostępu do danych}
 \paragraph{}Macierze deklarowane są jako tablice dwuwymiarowe, co implikuje przechowywanie ich w pamięci jako pojedyncza linia. Niesie to za sobą możliwość analizy lokalności dostępu do danych.
-\begin{figure}[h]
+\begin{figure}[H]
 \includegraphics[width=\textwidth]{3petlowa.png}
 \caption{Metoda 3 pętlowa JKI}
 \end{figure}
@@ -171,4 +171,72 @@ Dla metody 6 pętlowej [1]:
 \subsection{Metoda 6 pętlowa IJK-IKJ}
 \subsubsection{Sekwencyjnie}
 \subsubsection{Równolegle}
+\section{Określenie zakresu zbieranych miar efektywności}
+\section{Analiza pomiarów}
+\subsection{Metoda 3 pętlowa JKI}
+\paragraph{Czas obliczeń.} Na poniższym wykresie widać zależność między czasem obliczeń, a rozmiarem instancji. Potwierdza to złożoność zaproponowanego algorytmu równą $O(n^{3})$. W dodatku różnice czasów wykonań metody sekwencyjnej oraz równoległej pokazują, że dla małych instancji problemu zastosowanie algorytmu równoległego nie musi być odpowiednie, jednak możliwości algorytmów równoległych uwidaczniają się przy większych rozmiarach instancji.
+\begin{figure}[H]
+\includegraphics{Tobl3.png}\\
+\end{figure}
+\paragraph{Prędkość obliczeń.} Wykres prędkości obliczeń w metodzie 3 pętlowej świadczy natomiast o spadku efektywności zastosowanego algorytmu dla kolejnych rozmiarów instancji w obu metodach. Powody spadku efektywnosci zostaną wymienione w dalszej części sprawozdania.
+\begin{figure}[H]
+\includegraphics{Predkosc3.png}\\
+\end{figure}
+\paragraph{Instrukcje na cykl.} Wskaźnik \textbf{IPC} oznacza średnią liczbę instrukcji kodu asemblera przypadającą na cykl pracy procesora. Jak widać, dla metody 3 pętlowej przy rozmiarach instancji od $n = 256$ następuje gwałtowny spadek wartości wskaźnika, świadczy to o obecności czynników zmniejszających efektywność, takich jak słaba przestrzenna lub czasowa lokalność dostępów do pamięci.
+\begin{figure}[H]
+\includegraphics{IPC3.png}\\
+\end{figure}
+\paragraph{Stosunek braku trafień do L2 DTLB.} Na wykresie można zauważyć osiągnięcie stusunku braku trafień bliskiego $1$ już dla rozmiaru instancji $n = 512$, potwierdza to przewidywania dotyczące słabej lokalności przestrzennej dostępów do pamięci. Implikuje to znaczny spadek efektywności przetwarzania.
+\begin{figure}[H]
+\includegraphics{SBTDPPL33.png}\\
+\end{figure}
+\paragraph{Wskaźnik braku trafień do pp L3.} Wskaźnik został policzony wg wzoru: $PPL3\ miss\ rate = L3\ miss / Data\ access$. Dla $Data access = 0$ przyjęto, że wartość wskaźnika bedzie równa 0. Wartosci wskaźnika wskazują na niską lokalność czasową dostępów do pamięci. Dla małych rozmiarów instancji wskaźnik ma wartość 0 ze względu na fakt, że macierze są przetrzymywane w pamięci podręcznej od chwili ich inicjalizacji.
+\begin{figure}[H]
+\includegraphics{L3MissRate3.png}
+\end{figure}
+\paragraph{Przyspieszenie} Przyspieszenie osiąga wartość ponad $3.5$ od instancji o rozmiarze $n = 512$, świadczy to o tym, że problem jest łatwy do zrównoleglenia
+\begin{figure}[H]
+\includegraphics{Przyspieszenie3.png}
+\end{figure}
+\paragraph{Koszt synchronizacji} Koszt synchronizacji maleje wraz z rozmiarem instancji. Jest to zrozumiałe ze względu na fakt, że istnieje tylko jeden punkt synchronizacji wątków niezależnie od rozmiaru instancji.
+\begin{figure}[H]
+\includegraphics{Synchro3.png}
+\end{figure}
+
+\subsection{Metoda 6cio pętlowa}
+
+\paragraph{Czas obliczeń.} Wykres czasu obliczeń w metodzie 6-cio pętlowej również wskazuje na złożoność obliczeniową problemu. Można zaobserwować również różnice w czasie obliczeń w zależności od wielkości parametru $r$. Jest ona spowodowana zajmowaniem przez kolejne podmacierze różnej ilości miejsca w pamięci podręcznej. W dalszej części sprawozdania przyjmujemy, że w nazwie instancji metody sześciopętlowej znajdują się odpowiednio $n$ oraz $r$ oddzielone separatorem '\_'
+\begin{figure}[H]
+\includegraphics{Tobl6.png}
+\end{figure}
+
+\paragraph{Prędkość obliczeń.} Dla metody 6-cio pętlowej prędkość obliczeń ulega niewielkim wahaniom w zależnosci od rozmiaru instancji, co pokazuje, że zastosowanie algorytmu 6-cio pętlowego pozwala poprawić lokalność przestrzenną lub czasową dostępów. Dla metody równoległej w zależności od wielkości parametru $r$ prędkość obliczeń ulega dużej zmianie, dla rozmiarów instancji powyżej $128$ najlepsze wyniki zostały uzyskane dla $r = 64$, następnie wraz ze wzrostem $r$, prędkość zaczyna maleć. Jest to spowodowane utratą czasowej lokalności dostępów do pamięci ze względu na zajmowanie przez podmacierz dużej ilości miejsca w pamięci podręcznej. Z drugiej jednak strony dla wielkości $r = 16$ również następuje spadek prędkości ze względu na częste odwołania do pp, przez co musi być ona częściej aktualizowana. Dla metody sekwencyjnej najlepszą mierzoną wartością r było 16, różnica może wynikać z tego, że dla wielu procesorów lokalnoś czasowa w ramach pętli czwartej wewnętrznej pozwala na wielokrotne używanie kolumny macierzy B przez wszystkie procesory.
+\begin{figure}[H]
+\includegraphics{Predkosc6.png}\\
+\end{figure}
+
+\paragraph{Instrukcje na cykl.} W odróżnieniu od metody 3 pętlowej wartość wskaźnika IPC utrzymuje podobną wartość w zależności od rozmiaru instancji, co wskazuje na obniżenie wpływu czynników obniżających efektywność przetwarzania kodu
+\begin{figure}[H]
+\includegraphics{IPC6.png}\\
+\end{figure}
+
+\paragraph{Stosunek braku trafień do L2 DTLB.} Dla metody 6-cio pętlowej przy odpowiednim doborze parametru $r$ można zapewnić lokalność przestrzenną dostępu do danych. W przypadku wybranych wartości $r$ udaje się zachować lokalność przestrzenną dla $r \in \{64, 128, 256\}$. TODO
+\begin{figure}[H]
+\includegraphics{SBTDPPL36.png}\\
+\end{figure}
+
+\paragraph{Wskaźnik braku trafień do pp L3.} 
+\begin{figure}[H]
+\includegraphics{L3MissRate6.png}
+\end{figure}
+
+\paragraph{Przyspieszenie} Przyspieszenie osiąga wartość ponad $3.5$ od instancji o rozmiarze $n = 512$, świadczy to o tym, że problem jest łatwy do zrównoleglenia
+\begin{figure}[H]
+\includegraphics{Przyspieszenie3.png}
+\end{figure}
+
+\paragraph{Koszt synchronizacji} Koszt synchronizacji maleje wraz z rozmiarem instancji. Jest to zrozumiałe ze względu na fakt, że istnieje tylko jeden punkt synchronizacji wątków niezależnie od rozmiaru instancji.
+\begin{figure}[H]
+\includegraphics{Synchro3.png}
+\end{figure}
 \end{document}
