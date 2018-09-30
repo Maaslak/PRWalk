@@ -1,21 +1,14 @@
 \documentclass{scrartcl}
-\title{Sprawozdanie 1 \\ Przetwarzanie równoległe}
-\subtitle{Mnożenie macierzy porównanie efektywności metod –\\
-3 pętle - kolejność pętli: jki,\\
-6 pętli - kolejność pętli: zewnętrznych ijk, wewnętrznych: ikj, podział pracy przed pętlą 1.}
-\date{2018-05-13}
-\author{Bartosz Nawrotek, Krystian Hoczkiewicz \\
-Prowadzący: dr inż. Rafał Walkowiak}
-
 \usepackage{datatool}
 \usepackage{pgffor}
 
 \usepackage{float}
 \usepackage{datatool}
 \usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
 \usepackage{mathtools}
 \usepackage{amssymb}
-\usepackage[T1]{fontenc}
 \usepackage{listings}
 \usepackage{color}
 \usepackage{geometry}
@@ -55,6 +48,13 @@ Prowadzący: dr inż. Rafał Walkowiak}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 \lstset{style=mystyle}
 
+\title{Sprawozdanie 1 \\ Przetwarzanie równoległe}
+\subtitle{Mnożenie macierzy porównanie efektywności metod –\\
+3 pętle - kolejność pętli: jki,\\
+6 pętli - kolejność pętli: zewnętrznych ijk, wewnętrznych: ikj, podział pracy przed pętlą 1.}
+\date{2018-05-13}
+\author{Bartosz Nawrotek, Krystian Hoczkiewicz \\
+Prowadzący: dr inż. Rafał Walkowiak}
 
 \begin{document}
 \maketitle
@@ -69,7 +69,25 @@ Prowadzący: dr inż. Rafał Walkowiak}
 R_{i, j} = \sum_{k = 1}^{n}{A_{i, k}B_{k, j}}
 \end{equation}
 gdzie $n$ jest ilością wierszy macierzy kwadratowych $A$ oraz $B$.
-Do przeprowadzenia pomiarów korzystano z oprogramowania Code XL oraz do pomiaru czasu działania algorytmu biblioteka time.h.
+Do przeprowadzenia pomiarów korzystano z oprogramowania Vtune oraz do pomiaru czasu działania algorytmu biblioteka <chrono>.
+\subsection{System obliczeniowy}
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+Model procesora                & Intel® Xeon® Processor E3-1220 v2                       \\ \hline
+Liczba rdzeni                  & 4                                                       \\ \hline
+Liczba wątków                  & 4                                                       \\ \hline
+Bazowa częstotliwość procesora & 3,10 GHz                                                \\ \hline
+Wielkość Cache                 & 8 MB                                                    \\ \hline
+Szybkość magistrali            & 5 GT/s DMI                                              \\ \hline
+Pamięć operacyjna              & 12 GB DDR3 1600                                         \\ \hline
+Hyper-Threading                & Brak                                                    \\ \hline
+Generacja                      & Sandy Bridge                                            \\ \hline
+Zestaw instrukcji              & 64-bit                                                  \\ \hline
+DTBL/STBL                      & 64 wpisy adresów do 4KB stron / STBL 512 wpisów adresów \\ \hline
+\end{tabular}
+\end{table}
+\newpage 
 \section{Analiza algorytmów oraz dyrektyw Open MP}
 \subsection{Metoda 3 pętlowa JKI}
 \begin{lstlisting}[language=C++, caption={Metoda trzypętlowa}]
@@ -112,10 +130,9 @@ void multiply_matrices_IJK_IKJ()
 \end{lstlisting}
 \paragraph{}Metoda 6 pętlowa wykazuje się tą samą złożonością obliczeniową co metoda 3 pętlowa. Wykorzystanie jej ma jednak wpływ na prędkość przetwarzania ze względu na budowę systemu obliczeniowego. Korzysta on z pamięci cache oraz bufora translacji, które aby optymalnie wykorzystać, należy zapewnić odpowiednie warunki przetwarzania, jak lokalność przestrzenna oraz czasowa.
 \subsection{Analiza poprawności algorytmów}
-\paragraph{}Oba algorytmy w wersji sekwencyjnej są poprawne, ze względu na definicję mnożenia macierzy. W wersji równoległej również, ze względu na to, że każdy proces korzysta z innej, rozłącznej części macierzy wynikowej. Nie jest wymagana żadna dodatkowa metoda synchronizacji.
+\paragraph{}Oba algorytmy w wersji sekwencyjnej są poprawne, ze względu na definicję mnożenia macierzy. W wersji równoległej również, ze względu na to, że każdy proces korzysta z innej, rozłącznej części macierzy wynikowej. Nie jest wymagana żadna dodatkowa metoda synchronizacji. Nie występuje zjawisko wyściugu w dostępie.
 \subsection{Efektywność - synchronizacja}
 \paragraph{}Jak było nadmienione w punkcie 2.1 oraz 2.2, obie metody cechują się tą samą złożonością obliczeniową. Jednak różnice efektywności mogą być znaczne ze względu na kolejność dostępu do danych z poszczególnych macierzy. Spodziewamy się prawie 4 krotnego przyspieszenia przetwarzania przy użyciu metod w wersji równoległej w stosunku do wersji sekwencyjnej ze względu na niski koszt synchronizacji (przydział pracy statyczny przed pętlą zewnętrzną oraz synchronizacja na końcu działania funkcji).
-\newpage
 \subsection{False sharing}
 \paragraph{}Jest to zjawisko, które może wystąpić tylko w przypadku przetwarzania równoległego. W metodzie równoległej 3 pętlowej zjawisko może wystąpić na krańcach przydzielonych obszarów macierzy $R$. Nie powinno jednak mieć to większego wpływu na czas przetwarzania ze względu na stosunkowo niewielkie fragmenty macierzy, gdzie zjawisko ma możliwość się pojawić.
 W metodzie równoległej 6 pętlowej zjawisko również może wystąpić na granicy ostatniego wiersza przydzielonego do danego procesora oraz pierwszego wiersza przydzielonego do kolejnego procesora. W tym wypadku, będzie prawdopodobnie niezauważalne, bo dla całej macierzy występują tylko 4 potencjalne miejsca wystąpienia tego zjawiska niezależnie od wielkości instancji.
@@ -123,10 +140,9 @@ W metodzie równoległej 6 pętlowej zjawisko również może wystąpić na gran
 \paragraph{}Macierze deklarowane są jako tablice dwuwymiarowe, co implikuje przechowywanie ich w pamięci jako pojedyncza linia. Niesie to za sobą możliwość analizy lokalności dostępu do danych.
 \begin{figure}[H]
 \includegraphics[width=\textwidth]{3petlowa.png}
-\caption{Metoda 3 pętlowa JKI}
+\caption{Metoda 3 pętlowa - diagram przedstawiający korzystanie z części macierzy w kolejnych pętlach wewnętrznych}
 \end{figure}
-\paragraph{}
-Dla metody 3 pętlowej biorąc pod uwagę iteracje wewnętrznej pętli można wyciągnąć następujące wnioski dla poszczególnych macierzy: \\
+\paragraph{}Dla metody 3 pętlowej biorąc pod uwagę iteracje wewnętrznej pętli można wyciągnąć następujące wnioski dla poszczególnych macierzy: \\
 \begin{itemize}
 \item R - brak lokalności przestrzennej ani czasowej
 \item A - brak lokalności przestrzennej ani czasowej
@@ -139,54 +155,54 @@ Dla metody 3 pętlowej biorąc pod uwagę iteracje wewnętrznej pętli można wy
 \item B - brak lokalności przestrzennej ani czasowej
 \end{itemize}
 \paragraph{}Braki lokalności spowodowane są iterowaniem po kolejnych elementach w kolumnach poszczególnych macierzy. Powodować to będzie znaczne spadki efektywności działania algorytm.
+\subsection{Uzasadnienie wielkości instancji} Dla poprawności wzorów przyjęto wielkości instancji oraz rozmiary podmacierzy jako wielokrotności linii pamięci. 
+\paragraph{Lokalność czasowa, metoda 3 pętlowa.}Aby zapewnić lokalność czasową przetwarzania należy spełnić poniższy warunek:
+\begin{equation}
+3 * 4N ^ 2 <= 8388608 [B]
+\end{equation}
+\paragraph{}Lewa strona wynika z rozmiaru trzech macierzy. Prawa strona natomiast jest rozmiarem pamięci podręcznej 8MB. Z czego mamy:
+\begin{equation}
+N < 837
+\end{equation}
+\paragraph{}Dla dwóch wewnętrznych pętli natomiast:
+\begin{equation}
+4N^2 + 4 * 64N \leq 8388608 [B]
+\end{equation}
+\paragraph{}Co daje:
+\begin{equation}
+N < 1417
+\end{equation}
+\paragraph{}Pierwszy człon jest wielkością potrzebną do zachowania macierzy $A$ w pamięci, kolejny wynika z konieczności przetrzymywania poszczególnych kolumn macierzy $R$ oraz $B$.
+\paragraph{Lokalność przestrzenna}Aby zapewnić lokalność przestrzenną zdefiniowaną jako zapewnienie jednokrotnego uzupełnienia odwzorowania strony na ramkę pamięci dla $N > W_{ram}$, gdzie $W_{ram}$ jest wielkością ramki pamięci należy spełnić następujący warunek:
+\begin{equation}
+3*4N ^ 2 <= 576 * 4096 [B]
+\end{equation}
+\paragraph{}Lewa strona wynika z wielkości trzech macierzy Powyższa suma powinna mieścić się w buforze translacji o wielkości $576 * 4096[B]$. Z czego mamy:
+\begin{equation}
+N < 443
+\end{equation}
 \begin{figure}[H]
-\includegraphics[width=\textwidth]{6petlowa.png}
-\caption{Metoda 6 pętlowa IJK-IKJ}
+\includegraphics[width=0.9\textwidth]{6petlowa.png}
+\caption{Metoda 6-cio pętlowa - diagram przedstawiający korzystanie z części macierzy w kolejnych pętlach wewnętrznych}
 \end{figure}
-\paragraph{Uzasadnienie wielkości instancji} Aby zapewnić lokalność czasową przetwarzania należy spełnić poniższy warunek:
+\paragraph{}Analiza lokalności w poszczególnych zagnieżdżonych pętlach analogiczna do metody 3 pętlowej.
+\paragraph{Lokalność czasowa w metodzie 6-cio pętlowej} Aby zachować lokalność czasową odwołań w przypadku metody 6-cio pętlowej należy zmieścić w pamięci podręcznej 3 podmacierze. dla każdego z wątków Z czego mamy:
 \begin{equation}
-4N ^ 2 + 128 [B] <= 8192 [kB]
+r^2 * 4 * 3 \leq 8388608
 \end{equation}
-\paragraph{}Pierwszy człon wynika z rozmiaru macierzy $A$. Człon drugi jest sumą pamięci potrzebnej do przechwania macierzy $B$ oraz $R$, na każdy element macierzy potrzebne jest jedno słowo w pamięci podręcznej o wielkości 64B. Suma tych dwóch człownów musi mieścić się w pamięci podręcznej o rozmiarze 8MB. \\
+\paragraph{}Co daje:
 \begin{equation}
-N <= 1431
+r < 837
 \end{equation}
-W związku z powyższym dowiadujemy się, że dla zadanej wielkości macierzy większej niz 1431 tracimy lokalność czasową.\\
-\\
-Aby zapewnić lokalność przestrzenną zdefiniowaną jako zapewnienie jednokrotnego uzupełnienia odwzorowania strony na ramkę pamięci dla $N > W_{ram}$, gdzie $W_{ram}$ jest wielkością ramki pamięci należy spełnić następujący warunek:
+\paragraph{}Niestety nie dokonano pomiarów dla tak wysokiej wartości parametru r, ponieważ na komputerze w trakcie wykonywania pomiarów działało znacznie więcej procesów, przez co udało się osiągnąć stosunkowo wysoki współczynik braku trafień już dla rozmiaru $r = 512$.
+\paragraph{}Dla algorytmu w wersji sekwencyjnej mamy:
 \begin{equation}
-4N ^ 2 + 8192 N <= 550 * 4096 [B]
+r < 1674
 \end{equation}
-\paragraph{}Pierwszy człon wynika z wielkości macierzy A, drugi z faktu, że na każdy element macierzy potrzebne jest zachowanie całej strony pamięci. Powyższa suma powinna mieścić się w buforze translacji o wielkości $550 * 4096[B]$.
-\paragraph{}
-Dla metody 6 pętlowej [1]:
-\begin{itemize}
-\item lokalność przestrzenna oraz czasowa
-\item lokalność przestrzenna
-\item lokalność przestrzenna oraz czasowa
-\end{itemize}
-[2]
-\begin{itemize}
-\item lokalność przestrzenna oraz czasowa
-\item lokalność przestrzenna oraz czasowa
-\item lokalność przestrzenna oraz czasowa
-\end{itemize}
+\paragraph{}Co wymagałoby mierzenia jeszcze większych rozmiarów instancji.
 \subsection{Przydział pracy do wątków}
-\paragraph{}Użycie dyrektywy Open MP "\#pragma omp parallel for" sprawia, że przydział pracy do wątków jest równomierny jeżeli jest to możliwe. Taki przydział występuje gdy liczba iteracji jest podzielna przez liczbę procesorów. W przeciwnym wypadku pozostałe iteracje (ich ilość jest równa reszcie z dzielenia liczby iteracji na liczbę procesorów)jest rozdzielana między wątkami. W tym wypadku możliwe jest zaobserwowanie nieznacznego spadku efektywności działającego algorytmu.
-//TODO OBRAZKI
-\section{Analiza przetwarzania}
-\subsection{Prezentacja miar i jakości przetwarzania}
-\paragraph{}
- Nazwa instancji - składa się na nią rozmiar macierzy, rozmiar instancji (w metodzie 6 pętlowej) oraz typ metody (3 lub 6 pętlowa).
-\subsection{Metoda 3 pętlowa JKI}
-\subsubsection{Sekwencyjnie}
-\subsubsection{Równolegle}
-\subsection{Metoda 6 pętlowa IJK-IKJ}
-\subsubsection{Sekwencyjnie}
-\subsubsection{Równolegle}
-\section{Określenie zakresu zbieranych miar efektywności}
-\section{Analiza pomiarów}
-\subsection{Metoda 3 pętlowa JKI}
+\paragraph{}Użycie dyrektywy Open MP "\#pragma omp parallel for" sprawia, że przydział pracy do wątków jest równomierny jeżeli jest to możliwe. Taki przydział występuje gdy liczba iteracji jest podzielna przez liczbę procesorów. W przeciwnym wypadku pozostałe iteracje (ich ilość jest równa reszcie z dzielenia liczby iteracji na liczbę procesorów)jest rozdzielana między wątkami. W tym wypadku możliwe jest zaobserwowanie nieznacznego spadku efektywności działającego algorytmu, jednak sprawozdanie nie zawiera dokładnej analizy tego zjawiska.
+\paragraph{}W metodzie 3 pętlowej do poszczególnych wątków przydzielanę są kolejne grupy kolumn macierzy $R$, $B$ oraz cała macierz $A$. Natomiast w metodzie 6-cio pętlowej przydzielane są grupy wierszy macierzy $C$, $A$ oraz cała macierz $B$.
 \paragraph{Czas obliczeń.} Na poniższym wykresie widać zależność między czasem obliczeń, a rozmiarem instancji. Potwierdza to złożoność zaproponowanego algorytmu równą $O(n^{3})$. W dodatku różnice czasów wykonań metody sekwencyjnej oraz równoległej pokazują, że dla małych instancji problemu zastosowanie algorytmu równoległego nie musi być odpowiednie, jednak możliwości algorytmów równoległych uwidaczniają się przy większych rozmiarach instancji.
 \begin{figure}[H]
 \includegraphics{Tobl3.png}\\
@@ -195,19 +211,23 @@ Dla metody 6 pętlowej [1]:
 \begin{figure}[H]
 \includegraphics{Predkosc3.png}\\
 \end{figure}
-\paragraph{Instrukcje na cykl.} Wskaźnik \textbf{IPC} oznacza średnią liczbę instrukcji kodu asemblera przypadającą na cykl pracy procesora. Jak widać, dla metody 3 pętlowej przy rozmiarach instancji od $n = 256$ następuje gwałtowny spadek wartości wskaźnika, świadczy to o obecności czynników zmniejszających efektywność, takich jak słaba przestrzenna lub czasowa lokalność dostępów do pamięci.
+\newpage
+\paragraph{Instrukcje na cykl.} Wskaźnik \textbf{IPC} oznacza średnią liczbę instrukcji kodu asemblera przypadającą na cykl pracy procesora. Jak widać, dla metody 3 pętlowej przy rozmiarach instancji od $n = 512$ następuje gwałtowny spadek wartości wskaźnika, świadczy to o obecności czynników zmniejszających efektywność, takich jak słaba przestrzenna lub czasowa lokalność dostępów do pamięci.
 \begin{figure}[H]
 \includegraphics{IPC3.png}\\
 \end{figure}
-\paragraph{Stosunek braku trafień do L2 DTLB.} Na wykresie można zauważyć osiągnięcie stusunku braku trafień bliskiego $1$ już dla rozmiaru instancji $n = 512$, potwierdza to przewidywania dotyczące słabej lokalności przestrzennej dostępów do pamięci. Implikuje to znaczny spadek efektywności przetwarzania.
+\newpage
+\paragraph{Stosunek braku trafień do L2 DTLB.} Na wykresie można zauważyć osiągnięcie stusunku braku trafień bliskiego $1$ już dla rozmiaru instancji $n = 512$, potwierdza to przewidywania dotyczące słabej lokalności przestrzennej dostępów do pamięci powyżej rozmiaru instancji $N > 443$. Implikuje to znaczny spadek efektywności przetwarzania.
 \begin{figure}[H]
 \includegraphics{SBTDPPL33.png}\\
 \end{figure}
-\paragraph{Wskaźnik braku trafień do pp L3.} Wskaźnik został policzony wg wzoru: $PPL3\ miss\ rate = L3\ miss / Data\ access$. Dla $Data access = 0$ przyjęto, że wartość wskaźnika bedzie równa 0. Wartosci wskaźnika wskazują na niską lokalność czasową dostępów do pamięci. Dla małych rozmiarów instancji wskaźnik ma wartość 0 ze względu na fakt, że macierze są przetrzymywane w pamięci podręcznej od chwili ich inicjalizacji.
+\newpage
+\paragraph{Wskaźnik braku trafień do pp L3.} Wskaźnik został policzony wg wzoru: $PPL3\ miss\ rate = L3\ miss / Data\ access$. Dla $Data\ access = 0$ przyjęto, że wartość wskaźnika bedzie równa 0, taka sytuacja może mieć miejsce ze względu na brak przekroczenia progu zliczania przy pomiarze dla małych rozmiarów instancji. Wartosci wskaźnika wskazują na niską lokalność czasową dostępów do pamięci. Dla małych rozmiarów instancji wskaźnik ma wartość 0 ze względu na fakt, że macierze są przetrzymywane w pamięci podręcznej od chwili ich inicjalizacji.
 \begin{figure}[H]
 \includegraphics{L3MissRate3.png}
 \end{figure}
-\paragraph{Przyspieszenie} Przyspieszenie osiąga wartość ponad $3.5$ od instancji o rozmiarze $n = 512$, świadczy to o tym, że problem jest łatwy do zrównoleglenia
+\newpage
+\paragraph{Przyspieszenie} Przyspieszenie osiąga wartość ponad $3.5$ od instancji o rozmiarze $n = 512$, świadczy to o tym, że problem jest łatwy do zrównoleglenia, nie narzuca wysokich kosztów synchronizacji, aby zachować poprawność.
 \begin{figure}[H]
 \includegraphics{Przyspieszenie3.png}
 \end{figure}
@@ -223,37 +243,44 @@ Dla metody 6 pętlowej [1]:
 \includegraphics{Tobl6.png}
 \end{figure}
 
-\paragraph{Prędkość obliczeń.} Dla metody 6-cio pętlowej prędkość obliczeń ulega niewielkim wahaniom w zależnosci od rozmiaru instancji, co pokazuje, że zastosowanie algorytmu 6-cio pętlowego pozwala poprawić lokalność przestrzenną lub czasową dostępów. Dla metody równoległej w zależności od wielkości parametru $r$ prędkość obliczeń ulega dużej zmianie. Najlepsze wyniki zostały uzyskane dla $r = 64$, następnie wraz ze wzrostem $r$, prędkość zaczyna maleć. Jest to spowodowane utratą czasowej lokalności dostępów do pamięci ze względu na zajmowanie przez podmacierz dużej ilości miejsca w pamięci podręcznej. Z drugiej jednak strony dla wielkości $r = 16$ również następuje spadek prędkości ze względu na częste odwołania do pp, przez co musi być ona częściej aktualizowana. Dla metody sekwencyjnej najlepszą mierzoną wartością r było 16, różnica może wynikać z tego, że dla wielu procesorów lokalnoś czasowa w ramach pętli czwartej wewnętrznej pozwala na wielokrotne używanie kolumny macierzy B przez wszystkie procesory.
+\newpage
+\paragraph{Prędkość obliczeń.} Dla metody 6-cio pętlowej prędkość obliczeń ulega niewielkim wahaniom w zależnosci od rozmiaru instancji, co pokazuje, że zastosowanie algorytmu 6-cio pętlowego pozwala poprawić lokalność przestrzenną lub czasową dostępów. Dla metody równoległej w zależności od wielkości parametru $r$ prędkość obliczeń ulega dużej zmianie. Najlepsze wyniki zostały uzyskane dla $r = 64$, następnie wraz ze wzrostem $r$, prędkość zaczyna maleć. Jest to spowodowane utratą czasowej lokalności dostępów do pamięci ze względu na zajmowanie przez podmacierz dużej ilości miejsca w pamięci podręcznej dla kolejnych zagnieżdżeń pętli. Z drugiej jednak strony dla wielkości $r = 16$ również następuje spadek prędkości ze względu na częste odwołania do pp, przez co musi być ona częściej aktualizowana. Dla metody sekwencyjnej najlepszą mierzoną wartością r było 16, różnica może wynikać z tego, że dla wielu procesorów lokalnoś czasowa w ramach pętli czwartej wewnętrznej pozwala na wielokrotne używanie kolumny macierzy B przez wszystkie procesory.
 \begin{figure}[H]
 \includegraphics{Predkosc6.png}\\
 \end{figure}
 
-\paragraph{Instrukcje na cykl.} W odróżnieniu od metody 3 pętlowej wartość wskaźnika IPC utrzymuje podobną wartość w zależności od rozmiaru instancji, co wskazuje na obniżenie wpływu czynników obniżających efektywność przetwarzania kodu
+\newpage
+\paragraph{Instrukcje na cykl.} W odróżnieniu od metody 3 pętlowej wartość wskaźnika IPC utrzymuje podobną wartość w zależności od rozmiaru instancji, co wskazuje na obniżenie wpływu czynników obniżających efektywność przetwarzania kodu.
 \begin{figure}[H]
 \includegraphics{IPC6.png}\\
 \end{figure}
 
+\newpage
 \paragraph{Stosunek braku trafień do L2 DTLB.} Dla metody 6-cio pętlowej przy odpowiednim doborze parametru $r$ można zapewnić lokalność przestrzenną dostępu do danych. W przypadku wybranych wartości $r$ udaje się zachować lokalność przestrzenną dla $r \in \{64, 128, 256\}$. TODO
 \begin{figure}[H]
 \includegraphics{SBTDPPL36.png}\\
 \end{figure}
 
-\paragraph{Wskaźnik braku trafień do pp L3.} W większości przypadków udało się utrzymać wskaźnik braku trafień do pp L3 na niskim poziomie, co wskazuje na to, że przy odpowiednim doborze parametru $r$ zachowujemy również lokalność czasową odwołań. Wyjątki widoczne na wykresie wynikają z nie mieszczenia się w pamięci podręcznej obszarów wynikających z wielkości podmacierzy oraz z częstego odwoływania się pp co może powodować, częstą wymianę danych w pp.
+\newpage
+\paragraph{Wskaźnik braku trafień do pp L3.} W większości przypadków udało się utrzymać wskaźnik braku trafień do pp L3 na niskim poziomie, co wskazuje na to, że przy odpowiednim doborze parametru $r$ zachowujemy również lokalność czasową odwołań. Wyjątki widoczne na wykresie wynikają z  z częstego odwoływania się pp co może powodować częste pobieranie danych do pamięci podręcznej.
 \begin{figure}[H]
 \includegraphics{L3MissRate6.png}
 \end{figure}
 
+\newpage
 \paragraph{Przyspieszenie} Uzyskane wyniki przyspieszenia pozwalają stwierdzić, że dla metody 6-cio pętlowej również można osiągnąć wysoki stopień zrównoleglenia Skrajnie niskie wartości przyspieszenia wynikają z braku lokalności dostępów w metodzie równoległej, przy zachowaniu lokalności w metodzie sekwencyjnej. Niestety nie zostało to pokazane na poprzednich wykresach ze względu na mały rozmiar instancji, który nie pozwalał na przekroczenie dobranego progu zliczania.
 \begin{figure}[H]
 \includegraphics{Przyspieszenie6.png}
 \end{figure}
 
-\paragraph{Koszt synchronizacji} TODO
+\newpage
+\paragraph{Koszt synchronizacji} Koszt synchronizacji podobnie jak w przypadku metody 3 pętlowej maleje wraz ze wzrostem rozmiaru instancji.
 \begin{figure}[H]
 \includegraphics{Synchro6.png}
 \end{figure}
 
 \section{Wnioski}
+\paragraph{} W sprawozdaniu udało się potwierdzić tezę o możliwości utrzymania efektywności przetwarzania niezależnie od wielkości instancji stosując metodę sześciopętlową dla problemu mnożenia macieży. Pokazuje to konieczność szerszej analizy działania algorytmów, niż tylko ograniczanie do złożoności obliczeniowej, która to w obu metodach była jednakowa. Dodatkowo pokazano, że koszty synchronizacji w obu metodach są bardzo niskie przez co problem mnożenia macierzy jest łatwy do zrównoleglenia. Ponadto porównując wykonywanie algorytmu na jednym oraz na 4 procesorach udało się pokazać, że rozwiązanie jest łatwo skalowalne, zachowany zostaje niski koszt synchronizacji, a uzyskane przyspieszenie jest prawie tylokrotne, co iloraz ilości wykorzystanych współbieżnie działających wątków. 
 \section{Wyniki tabelaryczne}
 \paragraph{} Poniżej zostały przedstawione wyniki tabelaryczne, na podstawie których zostały utworzone wykresy.
 \begin{table}[H]
