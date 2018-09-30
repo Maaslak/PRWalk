@@ -219,7 +219,7 @@ Dla metody 6 pętlowej [1]:
 \includegraphics{Tobl6.png}
 \end{figure}
 
-\paragraph{Prędkość obliczeń.} Dla metody 6-cio pętlowej prędkość obliczeń ulega niewielkim wahaniom w zależnosci od rozmiaru instancji, co pokazuje, że zastosowanie algorytmu 6-cio pętlowego pozwala poprawić lokalność przestrzenną lub czasową dostępów. Dla metody równoległej w zależności od wielkości parametru $r$ prędkość obliczeń ulega dużej zmianie, dla rozmiarów instancji powyżej $128$ najlepsze wyniki zostały uzyskane dla $r = 64$, następnie wraz ze wzrostem $r$, prędkość zaczyna maleć. Jest to spowodowane utratą czasowej lokalności dostępów do pamięci ze względu na zajmowanie przez podmacierz dużej ilości miejsca w pamięci podręcznej. Z drugiej jednak strony dla wielkości $r = 16$ również następuje spadek prędkości ze względu na częste odwołania do pp, przez co musi być ona częściej aktualizowana. Dla metody sekwencyjnej najlepszą mierzoną wartością r było 16, różnica może wynikać z tego, że dla wielu procesorów lokalnoś czasowa w ramach pętli czwartej wewnętrznej pozwala na wielokrotne używanie kolumny macierzy B przez wszystkie procesory.
+\paragraph{Prędkość obliczeń.} Dla metody 6-cio pętlowej prędkość obliczeń ulega niewielkim wahaniom w zależnosci od rozmiaru instancji, co pokazuje, że zastosowanie algorytmu 6-cio pętlowego pozwala poprawić lokalność przestrzenną lub czasową dostępów. Dla metody równoległej w zależności od wielkości parametru $r$ prędkość obliczeń ulega dużej zmianie. Najlepsze wyniki zostały uzyskane dla $r = 64$, następnie wraz ze wzrostem $r$, prędkość zaczyna maleć. Jest to spowodowane utratą czasowej lokalności dostępów do pamięci ze względu na zajmowanie przez podmacierz dużej ilości miejsca w pamięci podręcznej. Z drugiej jednak strony dla wielkości $r = 16$ również następuje spadek prędkości ze względu na częste odwołania do pp, przez co musi być ona częściej aktualizowana. Dla metody sekwencyjnej najlepszą mierzoną wartością r było 16, różnica może wynikać z tego, że dla wielu procesorów lokalnoś czasowa w ramach pętli czwartej wewnętrznej pozwala na wielokrotne używanie kolumny macierzy B przez wszystkie procesory.
 \begin{figure}[H]
 \includegraphics{Predkosc6.png}\\
 \end{figure}
@@ -234,18 +234,20 @@ Dla metody 6 pętlowej [1]:
 \includegraphics{SBTDPPL36.png}\\
 \end{figure}
 
-\paragraph{Wskaźnik braku trafień do pp L3.} 
+\paragraph{Wskaźnik braku trafień do pp L3.} W większości przypadków udało się utrzymać wskaźnik braku trafień do pp L3 na niskim poziomie, co wskazuje na to, że przy odpowiednim doborze parametru $r$ zachowujemy również lokalność czasową odwołań. Wyjątki widoczne na wykresie wynikają z nie mieszczenia się w pamięci podręcznej obszarów wynikających z wielkości podmacierzy oraz z częstego odwoływania się pp co może powodować, częstą wymianę danych w pp.
 \begin{figure}[H]
 \includegraphics{L3MissRate6.png}
 \end{figure}
 
-\paragraph{Przyspieszenie} Przyspieszenie osiąga wartość ponad $3.5$ od instancji o rozmiarze $n = 512$, świadczy to o tym, że problem jest łatwy do zrównoleglenia
+\paragraph{Przyspieszenie} Uzyskane wyniki przyspieszenia pozwalają stwierdzić, że dla metody 6-cio pętlowej również można osiągnąć wysoki stopień zrównoleglenia Skrajnie niskie wartości przyspieszenia wynikają z braku lokalności dostępów w metodzie równoległej, przy zachowaniu lokalności w metodzie sekwencyjnej. Niestety nie zostało to pokazane na poprzednich wykresach ze względu na mały rozmiar instancji, który nie pozwalał na przekroczenie dobranego progu zliczania.
 \begin{figure}[H]
-\includegraphics{Przyspieszenie3.png}
+\includegraphics{Przyspieszenie6.png}
 \end{figure}
 
-\paragraph{Koszt synchronizacji} Koszt synchronizacji maleje wraz z rozmiarem instancji. Jest to zrozumiałe ze względu na fakt, że istnieje tylko jeden punkt synchronizacji wątków niezależnie od rozmiaru instancji.
+\paragraph{Koszt synchronizacji} TODO
 \begin{figure}[H]
-\includegraphics{Synchro3.png}
+\includegraphics{Synchro6.png}
 \end{figure}
+
+\section{Wnioski}
 \end{document}
