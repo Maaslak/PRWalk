@@ -135,11 +135,20 @@ Dla metody 3 pętlowej biorąc pod uwagę iteracje wewnętrznej pętli można wy
 \item B - brak lokalności przestrzennej ani czasowej
 \end{itemize}
 \paragraph{}Braki lokalności spowodowane są iterowaniem po kolejnych elementach w kolumnach poszczególnych macierzy. Powodować to będzie znaczne spadki efektywności działania algorytm.
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{6petlowa.png}
+\caption{Metoda 6 pętlowa IJK-IKJ}
+\end{figure}
 \paragraph{Uzasadnienie wielkości instancji} Aby zapewnić lokalność czasową przetwarzania należy spełnić poniższy warunek:
 \begin{equation}
-4N ^ 2 + 128N <= 6144 [B]
+4N ^ 2 + 128 [B] <= 8192 [kB]
 \end{equation}
-\paragraph{}Pierwszy człon wynika z rozmiaru macierzy $A$. Człon drugi jest sumą pamięci potrzebnej do przechwania macierzy $B$ oraz $R$, na każdy element macierzy potrzebne jest jedno słowo w pamięci podręcznej o wielkości 64B. Suma tych dwóch człownów musi mieścić się w pamięci podręcznej o rozmiarze 6MB. \\
+\paragraph{}Pierwszy człon wynika z rozmiaru macierzy $A$. Człon drugi jest sumą pamięci potrzebnej do przechwania macierzy $B$ oraz $R$, na każdy element macierzy potrzebne jest jedno słowo w pamięci podręcznej o wielkości 64B. Suma tych dwóch człownów musi mieścić się w pamięci podręcznej o rozmiarze 8MB. \\
+\begin{equation}
+N <= 1431
+\end{equation}
+W związku z powyższym dowiadujemy się, że dla zadanej wielkości macierzy większej niz 1431 tracimy lokalność czasową.\\
+\\
 Aby zapewnić lokalność przestrzenną zdefiniowaną jako zapewnienie jednokrotnego uzupełnienia odwzorowania strony na ramkę pamięci dla $N > W_{ram}$, gdzie $W_{ram}$ jest wielkością ramki pamięci należy spełnić następujący warunek:
 \begin{equation}
 4N ^ 2 + 8192 N <= 550 * 4096 [B]
