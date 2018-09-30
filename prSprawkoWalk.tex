@@ -7,7 +7,11 @@
 \author{Bartosz Nawrotek, Krystian Hoczkiewicz \\
 Prowadzący: dr inż. Rafał Walkowiak}
 
+\usepackage{datatool}
+\usepackage{pgffor}
+
 \usepackage{float}
+\usepackage{datatool}
 \usepackage[utf8]{inputenc}
 \usepackage{mathtools}
 \usepackage{amssymb}
@@ -47,7 +51,7 @@ Prowadzący: dr inż. Rafał Walkowiak}
 \definecolor{backcolour}{rgb}{0.95,0.95,0.92}
 
 \usepackage{graphicx}
-\graphicspath{ {img/}{img/figures/}}
+\graphicspath{ {img/}{img/figures/} {img/tables/}}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 \lstset{style=mystyle}
 
@@ -241,4 +245,233 @@ Dla metody 6 pętlowej [1]:
 \end{figure}
 
 \section{Wnioski}
+\section{Wyniki tabelaryczne}
+\paragraph{} Poniżej zostały przedstawione wyniki tabelaryczne, na podstawie których zostały utworzone wykresy.
+\begin{table}[H]
+\begin{tabular}{|l|l|l|}
+\hline
+Wartosc wskaźnika IPC         & metoda równoległa & metoda sekwencyjna \\ \hline
+multiply\_matrices\_JKI\_256  & 6.9e-01           & 6.9e-01            \\ \hline
+multiply\_matrices\_JKI\_512  & 1.5e-01           & 1.3e-01            \\ \hline
+multiply\_matrices\_JKI\_768  & 1.5e-01           & 1.3e-01            \\ \hline
+multiply\_matrices\_JKI\_1024 & 1.5e-01           & 1.3e-01            \\ \hline
+multiply\_matrices\_JKI\_1536 & 1.4e-01           & 1.3e-01            \\ \hline
+multiply\_matrices\_sixLoops\_256\_16   & 2.8e+00           & 1.7e+00            \\ \hline
+multiply\_matrices\_sixLoops\_256\_64   & 3.0e+00           & 3.5e+00            \\ \hline
+multiply\_matrices\_sixLoops\_256\_128  & 1.8e+00           & 1.5e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_16   & 3.2e+00           & 2.3e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_64   & 2.5e+00           & 2.4e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_128  & 2.2e+00           & 2.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_256  & 2.0e+00           & 2.4e+00            \\ \hline
+multiply\_matrices\_sixLoops\_768\_16   & 2.9e+00           & 2.1e+00            \\ \hline
+multiply\_matrices\_sixLoops\_768\_64   & 2.7e+00           & 2.4e+00            \\ \hline
+multiply\_matrices\_sixLoops\_768\_128  & 2.2e+00           & 2.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_16  & 2.8e+00           & 1.9e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_64  & 2.7e+00           & 2.3e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_128 & 2.2e+00           & 1.9e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_256 & 2.0e+00           & 2.3e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_512 & 2.0e+00           & 2.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_16  & 2.6e+00           & 1.7e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_64  & 2.6e+00           & 2.3e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_128 & 2.1e+00           & 1.9e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_256 & 2.0e+00           & 2.3e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_512 & 1.9e+00           & 2.0e+00            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|}
+\hline
+Wskaźnik braku trafień do PP L3 & metoda równoległa & metoda sekwencyjna \\ \hline
+multiply\_matrices\_JKI\_256    & 2.8e-03           & 0.0e+00            \\ \hline
+multiply\_matrices\_JKI\_512    & 2.6e-03           & 1.0e-02            \\ \hline
+multiply\_matrices\_JKI\_768    & 5.3e-03           & 2.2e-02            \\ \hline
+multiply\_matrices\_JKI\_1024   & 1.3e-02           & 3.2e-02            \\ \hline
+multiply\_matrices\_JKI\_1536   & 2.1e-02           & 3.1e-02            \\ 
+\hline
+multiply\_matrices\_sixLoops\_256\_16   & 0.0e+00           & 0.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_256\_64   & 0.0e+00           & 0.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_256\_128  & 0.0e+00           & 1.3e-02            \\ \hline
+multiply\_matrices\_sixLoops\_512\_16   & 0.0e+00           & 0.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_64   & 0.0e+00           & 3.0e-03            \\ \hline
+multiply\_matrices\_sixLoops\_512\_128  & 0.0e+00           & 0.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_256  & 0.0e+00           & 0.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_768\_16   & 0.0e+00           & 7.1e-04            \\ \hline
+multiply\_matrices\_sixLoops\_768\_64   & 0.0e+00           & 1.3e-03            \\ \hline
+multiply\_matrices\_sixLoops\_768\_128  & 0.0e+00           & 4.2e-04            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_16  & 3.2e-04           & 3.4e-03            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_64  & 1.8e-04           & 1.4e-03            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_128 & 3.6e-04           & 1.8e-04            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_256 & 5.6e-04           & 3.8e-04            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_512 & 0.0e+00           & 1.9e-04            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_16  & 1.5e-03           & 7.9e-03            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_64  & 6.4e-04           & 1.2e-03            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_128 & 2.2e-04           & 3.8e-04            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_256 & 3.3e-04           & 1.6e-04            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_512 & 6.6e-04           & 5.0e-04            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|}
+\hline
+Średnia prędkość obliczeń{[}GFLOPS{]} & metoda równoległa & metoda sekwencyjna \\ \hline
+multiply\_matrices\_JKI\_256          & 1.4e+00           & 5.6e-01            \\ \hline
+multiply\_matrices\_JKI\_512          & 4.2e-01           & 1.2e-01            \\ \hline
+multiply\_matrices\_JKI\_768          & 4.3e-01           & 1.2e-01            \\ \hline
+multiply\_matrices\_JKI\_1024         & 4.4e-01           & 1.2e-01            \\ \hline
+multiply\_matrices\_JKI\_1536         & 4.3e-01           & 1.2e-01            \\ \hline
+multiply\_matrices\_sixLoops\_256\_16   & 2.0e+01           & 1.6e+01            \\ \hline
+multiply\_matrices\_sixLoops\_256\_64   & 2.0e+01           & 1.1e+01            \\ \hline
+multiply\_matrices\_sixLoops\_256\_128  & 2.0e+01           & 9.7e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_16   & 2.9e+01           & 1.5e+01            \\ \hline
+multiply\_matrices\_sixLoops\_512\_64   & 4.1e+01           & 1.1e+01            \\ \hline
+multiply\_matrices\_sixLoops\_512\_128  & 2.8e+01           & 9.9e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_256  & 1.7e+01           & 8.5e+00            \\ \hline
+multiply\_matrices\_sixLoops\_768\_16   & 2.7e+01           & 1.4e+01            \\ \hline
+multiply\_matrices\_sixLoops\_768\_64   & 3.7e+01           & 1.1e+01            \\ \hline
+multiply\_matrices\_sixLoops\_768\_128  & 2.7e+01           & 9.6e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_16  & 2.9e+01           & 1.3e+01            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_64  & 3.5e+01           & 1.1e+01            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_128 & 3.2e+01           & 9.5e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_256 & 3.0e+01           & 8.5e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_512 & 1.8e+01           & 9.3e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_16  & 2.7e+01           & 1.2e+01            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_64  & 3.7e+01           & 1.1e+01            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_128 & 3.1e+01           & 9.1e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_256 & 2.5e+01           & 8.5e+00            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_512 & 2.7e+01           & 9.3e+00            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+Przyspieszenie & 3 pętlowa \\ \hline
+256            & 2.5e+00   \\ \hline
+512            & 3.6e+00   \\ \hline
+768            & 3.6e+00   \\ \hline
+1024           & 3.6e+00   \\ \hline
+1536           & 3.6e+00   \\ \hline
+256\_16        & 1.2e+00       \\ \hline
+256\_64        & 1.9e+00       \\ \hline
+256\_128       & 2.0e+00       \\ \hline
+512\_16        & 1.9e+00       \\ \hline
+512\_64        & 3.7e+00       \\ \hline
+512\_128       & 2.8e+00       \\ \hline
+512\_256       & 2.0e+00       \\ \hline
+768\_16        & 1.9e+00       \\ \hline
+768\_64        & 3.4e+00       \\ \hline
+768\_128       & 2.8e+00       \\ \hline
+1024\_16       & 2.2e+00       \\ \hline
+1024\_64       & 3.3e+00       \\ \hline
+1024\_128      & 3.4e+00       \\ \hline
+1024\_256      & 3.5e+00       \\ \hline
+1024\_512      & 2.0e+00       \\ \hline
+1536\_16       & 2.2e+00       \\ \hline
+1536\_64       & 3.4e+00       \\ \hline
+1536\_128      & 3.4e+00       \\ \hline
+1536\_256      & 2.9e+00       \\ \hline
+1536\_512      & 2.9e+00       \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|}
+\hline
+Stosunek braku trafień do L2 DTLB & metoda równoległa & metoda sekwencyjna \\ \hline
+multiply\_matrices\_JKI\_256      & 2.1e-01           & 1.8e-01            \\ \hline
+multiply\_matrices\_JKI\_512      & 9.9e-01           & 1.0e+00            \\ \hline
+multiply\_matrices\_JKI\_768      & 9.8e-01           & 1.0e+00            \\ \hline
+multiply\_matrices\_JKI\_1024     & 9.9e-01           & 9.9e-01            \\ \hline
+multiply\_matrices\_JKI\_1536     & 9.9e-01           & 9.9e-01            \\ \hline
+multiply\_matrices\_sixLoops\_256\_16   & 0.0e+00           & 0.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_256\_64   & 0.0e+00           & 8.3e-02            \\ \hline
+multiply\_matrices\_sixLoops\_256\_128  & 0.0e+00           & 0.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_16   & 6.7e-02           & 1.3e-01            \\ \hline
+multiply\_matrices\_sixLoops\_512\_64   & 1.5e-02           & 1.1e-02            \\ \hline
+multiply\_matrices\_sixLoops\_512\_128  & 1.5e-02           & 0.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_512\_256  & 0.0e+00           & 0.0e+00            \\ \hline
+multiply\_matrices\_sixLoops\_768\_16   & 1.9e-01           & 3.1e-01            \\ \hline
+multiply\_matrices\_sixLoops\_768\_64   & 8.6e-03           & 1.0e-02            \\ \hline
+multiply\_matrices\_sixLoops\_768\_128  & 1.3e-02           & 4.1e-03            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_16  & 2.0e-01           & 3.2e-01            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_64  & 7.3e-03           & 1.1e-02            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_128 & 5.7e-03           & 3.5e-03            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_256 & 7.2e-03           & 9.6e-03            \\ \hline
+multiply\_matrices\_sixLoops\_1024\_512 & 2.9e-01           & 2.8e-01            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_16  & 2.2e-01           & 3.4e-01            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_64  & 8.7e-03           & 8.5e-03            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_128 & 4.1e-03           & 3.2e-03            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_256 & 6.5e-03           & 1.1e-02            \\ \hline
+multiply\_matrices\_sixLoops\_1536\_512 & 3.0e-01           & 2.9e-01            \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+Kosz synchronizacji           & 3petlowa \\ \hline
+multiply\_matrices\_JKI\_256  & 3.5e-01  \\ \hline
+multiply\_matrices\_JKI\_512  & 1.3e-01  \\ \hline
+multiply\_matrices\_JKI\_768  & 1.0e-01  \\ \hline
+multiply\_matrices\_JKI\_1024 & 9.4e-02  \\ \hline
+multiply\_matrices\_JKI\_1536 & 1.0e-01  \\ \hline
+multiply\_matrices\_sixLoops\_256\_16   & 4.1e-01  \\ \hline
+multiply\_matrices\_sixLoops\_256\_64   & 5.4e-01  \\ \hline
+multiply\_matrices\_sixLoops\_256\_128  & 4.1e-01  \\ \hline
+multiply\_matrices\_sixLoops\_512\_16   & 2.5e-01  \\ \hline
+multiply\_matrices\_sixLoops\_512\_64   & 5.6e-02  \\ \hline
+multiply\_matrices\_sixLoops\_512\_128  & 2.9e-01  \\ \hline
+multiply\_matrices\_sixLoops\_512\_256  & 5.4e-01  \\ \hline
+multiply\_matrices\_sixLoops\_768\_16   & 2.1e-01  \\ \hline
+multiply\_matrices\_sixLoops\_768\_64   & 1.7e-01  \\ \hline
+multiply\_matrices\_sixLoops\_768\_128  & 3.3e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1024\_16  & 1.4e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1024\_64  & 2.2e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1024\_128 & 1.6e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1024\_256 & 1.7e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1024\_512 & 5.1e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1536\_16  & 1.1e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1536\_64  & 1.6e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1536\_128 & 1.5e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1536\_256 & 3.2e-01  \\ \hline
+multiply\_matrices\_sixLoops\_1536\_512 & 2.4e-01  \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\begin{tabular}{|l|l|l|}
+\hline
+Czas obliczeń{[}s{]}               & metoda sekwencyjna & metoda równoległa \\ \hline
+multiply\_seq\_matrices\_JKI\_256  & 6.0e-02            & 2.4e-02           \\ \hline
+multiply\_seq\_matrices\_JKI\_512  & 2.3e+00            & 6.3e-01           \\ \hline
+multiply\_seq\_matrices\_JKI\_768  & 7.6e+00            & 2.1e+00           \\ \hline
+multiply\_seq\_matrices\_JKI\_1024 & 1.8e+01            & 4.9e+00           \\ \hline
+multiply\_seq\_matrices\_JKI\_1536 & 6.1e+01            & 1.7e+01           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_256\_16   & 2.1e-03            & 1.7e-03           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_256\_64   & 3.1e-03            & 1.6e-03           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_256\_128  & 3.4e-03            & 1.7e-03           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_512\_16   & 1.7e-02            & 9.3e-03           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_512\_64   & 2.4e-02            & 6.6e-03           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_512\_128  & 2.7e-02            & 9.5e-03           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_512\_256  & 3.1e-02            & 1.6e-02           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_768\_16   & 6.3e-02            & 3.3e-02           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_768\_64   & 8.2e-02            & 2.4e-02           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_768\_128  & 9.5e-02            & 3.4e-02           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1024\_16  & 1.6e-01            & 7.4e-02           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1024\_64  & 2.0e-01            & 6.1e-02           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1024\_128 & 2.3e-01            & 6.7e-02           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1024\_256 & 2.5e-01            & 7.2e-02           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1024\_512 & 2.3e-01            & 1.2e-01           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1536\_16  & 5.9e-01            & 2.7e-01           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1536\_64  & 6.8e-01            & 2.0e-01           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1536\_128 & 8.0e-01            & 2.3e-01           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1536\_256 & 8.5e-01            & 3.0e-01           \\ \hline
+multiply\_seq\_matrices\_sixLoops\_1536\_512 & 7.8e-01            & 2.7e-01           \\ \hline
+\end{tabular}
+\end{table}
+
+
+
 \end{document}
